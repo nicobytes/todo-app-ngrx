@@ -13,7 +13,7 @@ export class AddTodoAction implements Action {
 
   constructor(
     public text: string
-  ){ 
+  ) {
     this.id = Math.random();
   }
 }
@@ -23,7 +23,7 @@ export class DeleteTodoAction implements Action {
 
   constructor(
     public id: number
-  ){}
+  ) {}
 }
 
 export class ToggleAction implements Action {
@@ -31,7 +31,7 @@ export class ToggleAction implements Action {
 
   constructor(
     public id: number
-  ){ }
+  ) {}
 }
 
 export class UpdateAction implements Action {
@@ -40,7 +40,7 @@ export class UpdateAction implements Action {
   constructor(
     public id: number,
     public text: string,
-  ){ }
+  ) {}
 }
 
 export class ClearCompletedAction implements Action {

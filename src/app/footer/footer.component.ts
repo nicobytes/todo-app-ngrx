@@ -21,15 +21,15 @@ export class FooterComponent implements OnInit {
     private store: Store<AppState>
   ) {
     this.store.select(getCountTodos)
-    .subscribe(count =>{
+    .subscribe(count => {
       this.countTodos = count;
     });
     this.store.select(getStateCompleted)
-    .subscribe(state =>{
+    .subscribe(state => {
       this.stateCompleted = state;
     });
     this.store.select('filter')
-    .subscribe(fitler=>{
+    .subscribe(fitler => {
       this.currentFilter = fitler;
     });
 
@@ -38,23 +38,23 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
   }
 
-  showAll(){
+  showAll() {
     this.store.dispatch(new FilterActions.SetFilterAction('SHOW_ALL'));
   }
 
-  showActive(){
+  showActive() {
     this.store.dispatch(new FilterActions.SetFilterAction('SHOW_ACTIVE'));
   }
 
-  showCompleted(){
+  showCompleted() {
     this.store.dispatch(new FilterActions.SetFilterAction('SHOW_COMPLETED'));
   }
 
-  clearCompleted(){
+  clearCompleted() {
     this.store.dispatch(new TodoActions.ClearCompletedAction());
   }
 
-  completedAll(){
+  completedAll() {
     this.store.dispatch(new TodoActions.CompletedAllAction());
   }
 

@@ -4,7 +4,7 @@ import { AppState } from './app.reducer';
 export const getState = (state: AppState) => state;
 export const getTodos = (state: AppState) => state.todos;
 
-export const getVisibleTodos = createSelector(getState, (state: AppState)=>{
+export const getVisibleTodos = createSelector(getState, (state: AppState) => {
   switch (state.filter) {
     case 'SHOW_ALL':
       return state.todos;
@@ -15,10 +15,10 @@ export const getVisibleTodos = createSelector(getState, (state: AppState)=>{
   }
 });
 
-export const getCountTodos = createSelector(getTodos, (todos)=>{
+export const getCountTodos = createSelector(getTodos, (todos) => {
   return todos.filter(todo => !todo.completed).length;
 });
 
-export const getStateCompleted = createSelector(getTodos, (todos)=>{
+export const getStateCompleted = createSelector(getTodos, (todos) => {
   return todos.every(todo => todo.completed);
 });

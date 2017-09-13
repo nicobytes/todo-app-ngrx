@@ -22,10 +22,10 @@ export class TodoComponent implements OnInit {
   constructor(
     private store: Store<AppState>
   ) {
-    this.textField = new FormControl('',[Validators.required]);
+    this.textField = new FormControl('', [Validators.required]);
     this.checkField = new FormControl(false);
     this.checkField.valueChanges
-    .subscribe(state =>{
+    .subscribe(state => {
       console.log(state);
       this.store.dispatch(new TodoActions.ToggleAction(this.todo.id));
     });
@@ -36,22 +36,22 @@ export class TodoComponent implements OnInit {
     this.checkField.setValue(this.todo.completed, {emitEvent: false});
   }
 
-  updateText(){
-    if(this.textField.valid){
+  updateText() {
+    if (this.textField.valid) {
       const id = this.todo.id;
       const newText = this.textField.value;
       this.store.dispatch(new TodoActions.UpdateAction(id, newText));
     }
   }
 
-  activeEditMode(){
+  activeEditMode() {
     this.editing = !this.editing;
-    setTimeout(()=>{
+    setTimeout(() => {
       this.textInput.nativeElement.focus();
     });
   }
 
-  deleteTodo(){
+  deleteTodo() {
     const id = this.todo.id;
     this.store.dispatch(new TodoActions.DeleteTodoAction(id));
   }

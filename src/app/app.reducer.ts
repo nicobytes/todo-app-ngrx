@@ -4,7 +4,7 @@ import { TodosReducer } from './todo.reducer';
 import { FilterReducer } from './filter.reducer';
 import { Todo } from './todo.model';
 
-export interface AppState{
+export interface AppState {
   todos: Todo[];
   filter: string;
 }

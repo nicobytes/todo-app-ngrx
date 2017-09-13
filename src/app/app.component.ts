@@ -13,12 +13,12 @@ export class AppComponent {
 
   constructor(
     private store: Store<AppState>
-  ){
+  ) {
     this.run();
   }
 
-  private run(){
-    setTimeout(()=>{
+  private run() {
+    setTimeout(() => {
       this.store.dispatch(new TodoActions.AddTodoAction('nueva tarea'));
     }, 2000);
   }

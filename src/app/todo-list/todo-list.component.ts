@@ -29,7 +29,7 @@ export class TodoListComponent implements OnInit {
     });
     this.checkField = new FormControl();
     this.store.select(getStateCompleted)
-    .subscribe(status =>{
+    .subscribe(status => {
       this.checkField.setValue(status);
     });
     this.readTodosState();
@@ -38,28 +38,28 @@ export class TodoListComponent implements OnInit {
   ngOnInit() {
   }
 
-  readTodosState(){
+  readTodosState() {
     this.store.select(getVisibleTodos)
-    .subscribe(todos =>{
+    .subscribe(todos => {
       this.todos = todos;
     });
   }
 
-  toggleAll(){
+  toggleAll() {
     this.store.dispatch(new TodoActions.CompletedAllAction());
   }
 
-  private setFilter(filter: string){
-    switch (filter){
-      case 'active':{
+  private setFilter(filter: string) {
+    switch (filter) {
+      case 'active': {
         this.store.dispatch(new FilterActions.SetFilterAction('SHOW_ACTIVE'));
         break;
       }
-      case 'completed':{
+      case 'completed': {
         this.store.dispatch(new FilterActions.SetFilterAction('SHOW_COMPLETED'));
         break;
       }
-      default:{
+      default: {
         this.store.dispatch(new FilterActions.SetFilterAction('SHOW_ALL'));
         break;
       }
