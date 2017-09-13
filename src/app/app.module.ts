@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { rootReducer } from './app.reducer';
+import { rootReducer } from './../redux/app.reducer';
 
 import { AppComponent } from './app.component';
 import { TodoComponent } from './todo/todo.component';
