@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import { AppState } from './app.reducer';
+import * as TodoActions from './todo.actions';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  constructor(
+    private store: Store<AppState>
+  ){
+    this.run();
+  }
+
+  private run(){
+    setTimeout(()=>{
+      this.store.dispatch(new TodoActions.AddTodoAction('nueva tarea'));
+    }, 2000);
+  }
 }

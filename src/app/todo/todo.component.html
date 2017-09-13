@@ -1,0 +1,21 @@
+<li [class.completed]="todo.completed" [class.editing]="editing">
+  <div class="view">
+    <input 
+    class="toggle"
+    type="checkbox" 
+    [formControl]="checkField"/>
+    <label
+      (dblclick)="activeEditMode()">
+      {{ todo.text }}
+    </label>
+    <button class="destroy" (click)="deleteTodo()"></button>
+  </div>
+  <input 
+    class="edit"
+    type="text" 
+    #textInput
+    (keyup.enter)="updateText()"
+    (blur)="updateText()"
+    [formControl]="textField" 
+    [hidden]="editing" />
+</li>
