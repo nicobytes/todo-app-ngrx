@@ -26,7 +26,6 @@ export class TodoComponent implements OnInit {
     this.checkField = new FormControl(false);
     this.checkField.valueChanges
     .subscribe(state => {
-      console.log(state);
       this.store.dispatch(new TodoActions.ToggleAction(this.todo.id));
     });
   }
@@ -37,9 +36,10 @@ export class TodoComponent implements OnInit {
   }
 
   updateText() {
-    if (this.textField.valid) {
+    if (this.textField.valid && this.editing) {
       const id = this.todo.id;
       const newText = this.textField.value;
+      this.editing = false;
       this.store.dispatch(new TodoActions.UpdateAction(id, newText));
     }
   }
