@@ -4,50 +4,33 @@ import { Store } from '@ngrx/store';
 import { AppState } from './../../redux/app.reducer';
 import * as FilterActions from './../../redux/filter/filter.actions';
 import * as TodoActions from './../../redux/todo/todo.actions';
-import { getCountTodos, getStateCompleted } from './../../redux/todo/todo.selectors';
+import { getStateCompleted } from './../../redux/todo/todo.selectors';
 
 @Component({
   selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css']
+  templateUrl: './footer.component.html'
 })
 export class FooterComponent implements OnInit {
 
   countTodos: number;
-  stateCompleted: boolean;
   currentFilter: string;
+  showFooter: boolean;
 
   constructor(
     private store: Store<AppState>
   ) {
-    this.store.select(getCountTodos)
-    .subscribe(count => {
-      this.countTodos = count;
-    });
-    this.store.select(getStateCompleted)
-    .subscribe(state => {
-      this.stateCompleted = state;
+    this.store.select('todos')
+    .subscribe(todos => {
+      this.countTodos = todos.filter(t => !t.completed).length;
+      this.showFooter = todos.length > 0;
     });
     this.store.select('filter')
     .subscribe(fitler => {
       this.currentFilter = fitler;
     });
-
   }
 
   ngOnInit() {
-  }
-
-  showAll() {
-    this.store.dispatch(new FilterActions.SetFilterAction('SHOW_ALL'));
-  }
-
-  showActive() {
-    this.store.dispatch(new FilterActions.SetFilterAction('SHOW_ACTIVE'));
-  }
-
-  showCompleted() {
-    this.store.dispatch(new FilterActions.SetFilterAction('SHOW_COMPLETED'));
   }
 
   clearCompleted() {

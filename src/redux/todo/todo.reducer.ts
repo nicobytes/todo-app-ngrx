@@ -15,6 +15,9 @@ export function TodosReducer(state: Todo[] = initialState, action: TodoActions.T
         }
       ];
     }
+    case TodoActions.POPULATE_TODOS: {
+      return action.todos;
+    }
     case TodoActions.TOGGLE_TODO: {
       return state.map(todo => {
         if (action.id === todo.id) {

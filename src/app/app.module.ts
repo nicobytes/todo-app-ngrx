@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { TodoComponent } from './todo/todo.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { FooterComponent } from './footer/footer.component';
-import { AddTodoComponent } from './add-todo/add-todo.component';
+import { NewTodoComponent } from './new-todo/new-todo.component';
 
 const routes: Routes = [
   // basic routes
@@ -24,7 +24,7 @@ const routes: Routes = [
     TodoComponent,
     TodoListComponent,
     FooterComponent,
-    AddTodoComponent
+    NewTodoComponent
   ],
   imports: [
     BrowserModule,

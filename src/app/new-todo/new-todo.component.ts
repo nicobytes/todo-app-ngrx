@@ -6,11 +6,10 @@ import { AppState } from './../../redux/app.reducer';
 import * as TodoActions from './../../redux/todo/todo.actions';
 
 @Component({
-  selector: 'app-add-todo',
-  templateUrl: './add-todo.component.html',
-  styleUrls: ['./add-todo.component.css']
+  selector: 'app-new-todo',
+  templateUrl: './new-todo.component.html'
 })
-export class AddTodoComponent implements OnInit {
+export class NewTodoComponent implements OnInit {
 
   textField: FormControl;
 
@@ -25,8 +24,8 @@ export class AddTodoComponent implements OnInit {
 
   saveTodo() {
     if (this.textField.valid) {
-      const text = this.textField.value;
-      this.store.dispatch(new TodoActions.AddTodoAction(text));
+      const text: string = this.textField.value;
+      this.store.dispatch(new TodoActions.AddTodoAction(text.trim()));
       this.textField.setValue('');
     }
   }

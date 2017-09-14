@@ -15,10 +15,6 @@ export const getVisibleTodos = createSelector(getState, (state: AppState) => {
   }
 });
 
-export const getCountTodos = createSelector(getTodos, (todos) => {
-  return todos.filter(todo => !todo.completed).length;
-});
-
 export const getStateCompleted = createSelector(getTodos, (todos) => {
   return todos.every(todo => todo.completed);
 });

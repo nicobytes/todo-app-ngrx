@@ -8,8 +8,7 @@ import * as TodoActions from './../../redux/todo/todo.actions';
 
 @Component({
   selector: 'app-todo',
-  templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.css']
+  templateUrl: './todo.component.html'
 })
 export class TodoComponent implements OnInit {
 
@@ -38,9 +37,9 @@ export class TodoComponent implements OnInit {
   updateText() {
     if (this.textField.valid && this.editing) {
       const id = this.todo.id;
-      const newText = this.textField.value;
+      const newText: string = this.textField.value;
       this.editing = false;
-      this.store.dispatch(new TodoActions.UpdateAction(id, newText));
+      this.store.dispatch(new TodoActions.UpdateAction(id, newText.trim()));
     }
   }
 
