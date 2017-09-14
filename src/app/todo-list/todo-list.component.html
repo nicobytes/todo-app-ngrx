@@ -1,9 +1,9 @@
-<section class="main">
+<section id="main" class="main">
   <div class="toogle-view" *ngIf="todos.length > 0">
-    <input class="toggle-all" type="checkbox" [formControl]="checkField">
+    <input id="toggle-all" class="toggle-all" type="checkbox" [formControl]="checkField">
     <label (click)="toggleAll()">Mark all as complete</label>
   </div>
-  <ul class="todo-list">
+  <ul id="todo-list" class="todo-list">
     <app-todo [todo]="todo" *ngFor="let todo of todos"></app-todo>
   </ul>
 </section>

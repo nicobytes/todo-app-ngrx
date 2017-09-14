@@ -1,6 +1,6 @@
-<footer class="footer" *ngIf="showFooter">
-  <span class="todo-count">{{ countTodos }} items left</span>
-  <ul class="filters">
+<footer id="footer" class="footer" *ngIf="showFooter">
+  <span id="todo-count" class="todo-count">{{ countTodos }} items left</span>
+  <ul id="filters" class="filters">
     <li>
       <a 
         [routerLink]="['/']" 
@@ -23,5 +23,5 @@
       </a>
     </li>
   </ul>
-  <button class="clear-completed" (click)="clearCompleted()">Clear completed</button>
+  <button id="clear-completed" class="clear-completed" (click)="clearCompleted()">Clear completed</button>
 </footer>
