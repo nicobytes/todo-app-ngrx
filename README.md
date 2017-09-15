@@ -6,8 +6,6 @@ You can see all files about redux in [TodoMV* App](http://todomvc.com/)
 
 # [DEMO ONLINE](https://todomvc-8d040.firebaseapp.com/)
 
-# Coverage 100%
-
 This app is coverage in 100%
 
 ![coverage](https://firebasestorage.googleapis.com/v0/b/todomvc-8d040.appspot.com/o/coverage.png?alt=media&token=e4e0ab21-51f3-4959-8969-381f8a081944 "coverage")
