@@ -25,7 +25,8 @@ export class TodoComponent implements OnInit {
     this.checkField = new FormControl(false);
     this.checkField.valueChanges
     .subscribe(state => {
-      this.store.dispatch(new TodoActions.ToggleAction(this.todo.id));
+      const action = new TodoActions.ToggleAction(this.todo.id);
+      this.store.dispatch(action);
     });
   }
 
@@ -38,13 +39,14 @@ export class TodoComponent implements OnInit {
     if (this.textField.valid && this.editing) {
       const id = this.todo.id;
       const newText: string = this.textField.value;
+      const action = new TodoActions.UpdateAction(id, newText.trim());
+      this.store.dispatch(action);
       this.editing = false;
-      this.store.dispatch(new TodoActions.UpdateAction(id, newText.trim()));
     }
   }
 
   activeEditMode() {
-    this.editing = !this.editing;
+    this.editing = true;
     setTimeout(() => {
       this.textInput.nativeElement.focus();
     });
@@ -52,7 +54,8 @@ export class TodoComponent implements OnInit {
 
   deleteTodo() {
     const id = this.todo.id;
-    this.store.dispatch(new TodoActions.DeleteTodoAction(id));
+    const action = new TodoActions.DeleteTodoAction(id);
+    this.store.dispatch(action);
   }
 
 }

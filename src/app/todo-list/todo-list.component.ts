@@ -22,26 +22,13 @@ export class TodoListComponent implements OnInit {
     private store: Store<AppState>,
     private route: ActivatedRoute
   ) {
-    this.route.params
-    .subscribe(params => {
-      this.setFilter(params.filter);
-    });
     this.checkField = new FormControl();
-    this.store.select(getStateCompleted)
-    .subscribe(status => {
-      this.checkField.setValue(status);
-    });
+    this.readParams();
+    this.readStateCompleted();
     this.readTodosState();
   }
 
   ngOnInit() {
-  }
-
-  readTodosState() {
-    this.store.select(getVisibleTodos)
-    .subscribe(todos => {
-      this.todos = todos;
-    });
   }
 
   toggleAll() {
@@ -63,5 +50,26 @@ export class TodoListComponent implements OnInit {
         break;
       }
     }
+  }
+
+  private readTodosState() {
+    this.store.select(getVisibleTodos)
+    .subscribe(todos => {
+      this.todos = todos;
+    });
+  }
+
+  private readStateCompleted() {
+    this.store.select(getStateCompleted)
+    .subscribe(status => {
+      this.checkField.setValue(status);
+    });
+  }
+
+  private readParams() {
+    this.route.params
+    .subscribe(params => {
+      this.setFilter(params.filter);
+    });
   }
 }

@@ -17,7 +17,7 @@ import { NewTodoComponent } from './new-todo.component';
 export class BlankCmp {
 }
 
-fdescribe('NewTodoComponent', () => {
+describe('NewTodoComponent', () => {
   let component: NewTodoComponent;
   let fixture: ComponentFixture<NewTodoComponent>;
   let store: Store<AppState>;
