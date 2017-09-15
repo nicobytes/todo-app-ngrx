@@ -3,14 +3,12 @@ import { Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StoreModule, Store } from '@ngrx/store';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
 
 import { rootReducer, AppState } from './../../redux/app.reducer';
 import * as FilterActions from './../../redux/filter/filter.actions';
 import * as TodoActions from './../../redux/todo/todo.actions';
-import { FooterComponent } from './footer.component';
 
+import { FooterComponent } from './footer.component';
 
 @Component({
   selector: 'blank-cmp',
@@ -19,7 +17,7 @@ import { FooterComponent } from './footer.component';
 export class BlankCmp {
 }
 
-fdescribe('FooterComponent', () => {
+describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
   let store: Store<AppState>;
@@ -96,6 +94,17 @@ fdescribe('FooterComponent', () => {
       fixture.detectChanges();
       expect(component.countTodos).toEqual(0);
       expect(component.showFooter).toBeFalsy();
+    });
+
+  });
+
+  describe("test for currentFilter", () => {
+    
+    it('should currentFilter be "SHOW_ALL"', () => {
+      const action = new FilterActions.SetFilterAction('SHOW_ALL');
+      store.dispatch(action);
+      fixture.detectChanges();
+      expect(component.currentFilter).toEqual('SHOW_ALL');
     });
 
   });
