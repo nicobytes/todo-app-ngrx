@@ -1,0 +1,19 @@
+{
+  "hosting": {
+    "public": "dist",
+    "headers": [ {
+      "source" : "**/*.@(jpg|jpeg|gif|png|js|webp|css)",
+      "headers" : [ {
+        "key" : "Cache-Control",
+        "value" : "max-age=604800"
+      } ]
+    }, {
+      // Sets the cache header for 404 pages to cache for 5 minutes
+      "source" : "404.html",
+      "headers" : [ {
+        "key" : "Cache-Control",
+        "value" : "max-age=2592000"
+      } ]
+    } ]
+  }
+}
