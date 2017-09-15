@@ -19,26 +19,36 @@ export class FooterComponent implements OnInit {
   constructor(
     private store: Store<AppState>
   ) {
-    this.store.select('todos')
-    .subscribe(todos => {
-      this.countTodos = todos.filter(t => !t.completed).length;
-      this.showFooter = todos.length > 0;
-    });
-    this.store.select('filter')
-    .subscribe(fitler => {
-      this.currentFilter = fitler;
-    });
+    this.readFilterState();
+    this.readTodosState();
   }
 
   ngOnInit() {
   }
 
   clearCompleted() {
-    this.store.dispatch(new TodoActions.ClearCompletedAction());
+    const action = new TodoActions.ClearCompletedAction();
+    this.store.dispatch(action);
   }
 
   completedAll() {
-    this.store.dispatch(new TodoActions.CompletedAllAction());
+    const action = new TodoActions.CompletedAllAction();
+    this.store.dispatch(action);
+  }
+
+  private readTodosState() {
+    this.store.select('todos')
+    .subscribe(todos => {
+      this.countTodos = todos.filter(t => !t.completed).length;
+      this.showFooter = todos.length > 0;
+    });
+  }
+
+  private readFilterState() {
+    this.store.select('filter')
+    .subscribe(fitler => {
+      this.currentFilter = fitler;
+    });
   }
 
 }
