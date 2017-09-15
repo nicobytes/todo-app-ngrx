@@ -6,6 +6,7 @@ export const getTodos = (state: AppState) => state.todos;
 
 export const getVisibleTodos = createSelector(getState, (state: AppState) => {
   switch (state.filter) {
+    default:
     case 'SHOW_ALL':
       return state.todos;
     case 'SHOW_COMPLETED':
