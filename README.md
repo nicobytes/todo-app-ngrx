@@ -4,9 +4,7 @@ Is the example for use Angular + Ngrx (Redux) for a [TodoMV* App](http://todomvc
 
 You can see all files about redux in [TodoMV* App](http://todomvc.com/){:target="_blank"}
 
-# Demo
-
-
+# [DEMO ONLINE](https://dist-xwcoppfghj.now.sh){:target="_blank"}
 
 # Coverage 100%
 
