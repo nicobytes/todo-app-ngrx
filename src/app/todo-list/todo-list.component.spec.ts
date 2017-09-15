@@ -21,8 +21,7 @@ import { TodoComponent } from './../todo/todo.component';
 export class BlankCmp {
 }
 
-
-fdescribe('TodoListComponent', () => {
+describe('TodoListComponent', () => {
   let component: TodoListComponent;
   let fixture: ComponentFixture<TodoListComponent>;
   let store: Store<AppState>;

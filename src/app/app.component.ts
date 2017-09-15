@@ -19,14 +19,14 @@ export class AppComponent {
   }
 
   private populateTodos() {
-    const todos: Todo[] = JSON.parse(localStorage.getItem('angular-todos') || '[]');
+    const todos: Todo[] = JSON.parse(localStorage.getItem('angular-ngrx-todos') || '[]');
     this.store.dispatch(new TodoActions.PopulateTodosAction(todos));
   }
 
   private updateTodos() {
     this.store.select('todos')
     .subscribe(todos => {
-      localStorage.setItem('angular-todos', JSON.stringify(todos));
+      localStorage.setItem('angular-ngrx-todos', JSON.stringify(todos));
     });
   }
 
