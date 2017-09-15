@@ -1,5 +1,21 @@
 # TodosAppNgrx
 
+Is the example for use Angular + Ngrx (Redux) for a [TodoMV* App](http://todomvc.com/){:target="_blank"}
+
+You can see all files about redux in [TodoMV* App](http://todomvc.com/){:target="_blank"}
+
+# Demo
+
+
+
+# Coverage 100%
+
+This app is coverage in 100%
+
+
+
+# Angular Info
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.2.
 
 ## Development server

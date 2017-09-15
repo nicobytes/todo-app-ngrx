@@ -16,7 +16,7 @@ import { NewTodoComponent } from './new-todo/new-todo.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { AppComponent } from './app.component';
 
-fdescribe('AppComponent', () => {
+describe('AppComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
