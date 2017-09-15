@@ -4,8 +4,6 @@ import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { StoreModule, Store } from '@ngrx/store';
 import { RouterTestingModule } from '@angular/router/testing';
-// import { Observable } from 'rxjs';
-// import 'rxjs/add/observable/of';
 
 import { rootReducer, AppState } from './../redux/app.reducer';
 import * as TodoActions from './../redux/todo/todo.actions';
@@ -59,7 +57,7 @@ describe('AppComponent', () => {
       spyOn(store, 'dispatch').and.callThrough();
   
       spyOn(localStorage, 'getItem').and.returnValue('[]');
-  
+      
       let fixture = TestBed.createComponent(AppComponent);
       let component = fixture.componentInstance;
       fixture.detectChanges();
