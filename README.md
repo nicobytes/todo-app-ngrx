@@ -20,5 +20,5 @@ You can see all files about redux in [TodoMV* App](https://github.com/nicobytes/
 
 # Todos
 
-[] Add Angular Universal
-[] PWA
+- [] Add Angular Universal
+- [] PWA
