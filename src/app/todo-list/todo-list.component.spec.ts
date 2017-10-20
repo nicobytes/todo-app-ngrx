@@ -29,7 +29,7 @@ describe('TodoListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ 
+      declarations: [
         TodoListComponent,
         TodoComponent,
         BlankCmp
