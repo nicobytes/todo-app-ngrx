@@ -6,6 +6,11 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { rootReducer } from './../redux/app.reducer';
 
+import {
+  LocationStrategy,
+  HashLocationStrategy,
+} from '@angular/common';
+
 import { AppComponent } from './app.component';
 import { TodoComponent } from './todo/todo.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
@@ -36,7 +41,9 @@ const routes: Routes = [
       maxAge: 25 //  Retains last 25 states
     })
   ],
-  providers: [],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
