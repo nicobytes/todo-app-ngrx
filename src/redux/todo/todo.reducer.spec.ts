@@ -79,7 +79,7 @@ describe('Redux: TodosReducer', () => {
   });
 
   it('should return the same state with unknown action', () => {
-    let action: any = new TodoActions.CompletedAllAction();
+    const action: any = new TodoActions.CompletedAllAction();
     action.type = 'what';
     const oldState = [
       { id: 1, text: 'todo', completed: false },

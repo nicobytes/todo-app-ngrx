@@ -11,9 +11,11 @@ import * as TodoActions from './../../redux/todo/todo.actions';
 import { TodoComponent } from './todo.component';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'blank-cmp',
   template: ``
 })
+// tslint:disable-next-line:component-class-suffix
 export class BlankCmp {
 }
 
@@ -25,7 +27,7 @@ describe('TodoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ 
+      declarations: [
         TodoComponent,
         BlankCmp
       ],
@@ -60,31 +62,31 @@ describe('TodoComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe("Test for textField", ()=>{
-    
-    it("should textField be defined", ()=>{
+  describe('Test for textField', () => {
+
+    it('should textField be defined', () => {
       expect(component.textField).toBeDefined();
     });
 
-    it("should textField be valid", ()=>{
+    it('should textField be valid', () => {
       component.textField.setValue('new todo');
       expect(component.textField.valid).toBeTruthy();
     });
 
-    it("should textField be invalid", ()=>{
+    it('should textField be invalid', () => {
       component.textField.setValue('');
       expect(component.textField.invalid).toBeTruthy();
     });
 
   });
 
-  describe("Test for checkField", ()=>{
-    
-    it("should checkField be defined", ()=>{
+  describe('Test for checkField', () => {
+
+    it('should checkField be define', () => {
       expect(component.checkField).toBeDefined();
     });
 
-    it("should dispatch an action when checkField change state", ()=>{
+    it('should dispatch an action when checkField change state', () => {
       component.checkField.setValue(true);
       const action = new TodoActions.ToggleAction(component.todo.id);
       expect(store.dispatch).toHaveBeenCalledWith(action);
@@ -92,9 +94,9 @@ describe('TodoComponent', () => {
 
   });
 
-  describe("Test for updateText", ()=>{
-  
-    it("should dispatch an action if textField is valid and editing is true", ()=>{
+  describe('Test for updateText', () => {
+
+    it('should dispatch an action if textField is valid and editing is true', () => {
       component.editing = true;
       component.textField.setValue('update todo', { emitEvent: false });
       component.updateText();
@@ -102,7 +104,7 @@ describe('TodoComponent', () => {
       expect(store.dispatch).toHaveBeenCalledWith(action);
     });
 
-    it("should editing be false after send dispatch", ()=>{
+    it('should editing be false after send dispatch', () => {
       component.editing = true;
       component.textField.setValue('update todo', { emitEvent: false });
       component.updateText();
@@ -111,14 +113,14 @@ describe('TodoComponent', () => {
 
   });
 
-  describe("Test for activeEditMode", ()=>{
-    
-    it("should editing be true", ()=>{
+  describe('Test for activeEditMode', () => {
+
+    it('should editing be true', () => {
       component.activeEditMode();
       expect(component.editing).toBeTruthy();
     });
 
-    it("should textInput call focus", fakeAsync(()=>{
+    it('should textInput call focus', fakeAsync(() => {
       spyOn(component.textInput.nativeElement, 'focus').and.callThrough();
       component.activeEditMode();
       tick(1000);
@@ -127,9 +129,9 @@ describe('TodoComponent', () => {
 
   });
 
-  describe("Test for deleteTodo", ()=>{
-    
-    it("should dispatch an action", ()=>{
+  describe('Test for deleteTodo', () => {
+
+    it('should dispatch an action', () => {
       component.deleteTodo();
       const action = new TodoActions.DeleteTodoAction(component.todo.id);
       expect(store.dispatch).toHaveBeenCalledWith(action);

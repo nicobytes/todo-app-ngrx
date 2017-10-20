@@ -16,7 +16,7 @@ describe('Redux: TodoSelectors', () => {
   });
 
   describe('Test for getTodos', () => {
-    
+
     it('should return the todos', () => {
       const state = {
         todos: [],
@@ -29,7 +29,7 @@ describe('Redux: TodoSelectors', () => {
   });
 
   describe('Test for getVisibleTodos', () => {
-    
+
     it('should return the all todos with fitler "SHOW_ALL"', () => {
       const state = {
         todos: [

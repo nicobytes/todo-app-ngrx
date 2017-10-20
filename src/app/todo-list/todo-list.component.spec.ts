@@ -4,7 +4,7 @@ import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { StoreModule, Store } from '@ngrx/store';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 import { rootReducer, AppState } from './../../redux/app.reducer';
@@ -15,9 +15,11 @@ import { TodoListComponent } from './todo-list.component';
 import { TodoComponent } from './../todo/todo.component';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'blank-cmp',
   template: ``
 })
+// tslint:disable-next-line:component-class-suffix
 export class BlankCmp {
 }
 
@@ -62,13 +64,13 @@ describe('TodoListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe("Test for checkField", ()=>{
-    
-    it("should checkField be defined", ()=>{
+  describe('Test for checkField', () => {
+
+    it('should checkField be defined', () => {
       expect(component.checkField).toBeDefined();
     });
 
-    it("should checkField be true with new stateCompleted", ()=>{
+    it('should checkField be true with new stateCompleted', () => {
       const todos = [
         { id: 1, text: 'todo', completed: true },
         { id: 2, text: 'todo', completed: true },
@@ -79,7 +81,7 @@ describe('TodoListComponent', () => {
       expect(component.checkField.value).toBeTruthy();
     });
 
-    it("should checkField be false with new readStateCompleted", ()=>{
+    it('should checkField be false with new readStateCompleted', () => {
       const todos = [
         { id: 1, text: 'todo', completed: true },
         { id: 2, text: 'todo', completed: false },
@@ -92,9 +94,9 @@ describe('TodoListComponent', () => {
 
   });
 
-  describe("Test for toggleAll", ()=>{
-    
-    it("should dispatch an action", ()=>{
+  describe('Test for toggleAll', () => {
+
+    it('should dispatch an action', () => {
       component.toggleAll();
       const action = new TodoActions.CompletedAllAction();
       expect(store.dispatch).toHaveBeenCalledWith(action);
@@ -102,9 +104,9 @@ describe('TodoListComponent', () => {
 
   });
 
-  describe("Test for readTodosState", ()=>{
-    
-    it("should todos be equal that new todos", ()=>{
+  describe('Test for readTodosState', () => {
+
+    it('should todos be equal that new todos', () => {
       const todos = [
         { id: 1, text: 'todo', completed: true },
         { id: 2, text: 'todo', completed: false },
@@ -117,9 +119,9 @@ describe('TodoListComponent', () => {
 
   });
 
-  describe("Test for readParams", ()=>{
-    
-    it("should dispatch an action when filter is unknown", ()=> {
+  describe('Test for readParams', () => {
+
+    it('should dispatch an action when filter is unknown', () => {
 
       route = TestBed.get(ActivatedRoute);
       route.params = Observable.of({
@@ -134,7 +136,7 @@ describe('TodoListComponent', () => {
       expect(store.dispatch).toHaveBeenCalledWith(action);
     });
 
-    it('should dispatch an action when filter is "active"', ()=>{
+    it('should dispatch an action when filter is "active"', () => {
 
       route = TestBed.get(ActivatedRoute);
       route.params = Observable.of({
@@ -149,8 +151,8 @@ describe('TodoListComponent', () => {
       expect(store.dispatch).toHaveBeenCalledWith(action);
     });
 
-    it('should dispatch an action when filter is "completed"', ()=>{
-      
+    it('should dispatch an action when filter is "completed"', () => {
+
       route = TestBed.get(ActivatedRoute);
       route.params = Observable.of({
         'filter': 'completed'

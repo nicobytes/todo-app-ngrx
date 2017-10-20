@@ -11,9 +11,11 @@ import * as TodoActions from './../../redux/todo/todo.actions';
 import { FooterComponent } from './footer.component';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'blank-cmp',
   template: ``
 })
+// tslint:disable-next-line:component-class-suffix
 export class BlankCmp {
 }
 
@@ -24,7 +26,7 @@ describe('FooterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ 
+      declarations: [
         FooterComponent,
         BlankCmp
       ],
@@ -52,8 +54,8 @@ describe('FooterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe("test for clearCompleted", () => {
-    
+  describe('Test for clearCompleted', () => {
+
     it('should dispatch an action', () => {
       component.clearCompleted();
       const action = new TodoActions.ClearCompletedAction();
@@ -62,8 +64,8 @@ describe('FooterComponent', () => {
 
   });
 
-  describe("test for completedAll", () => {
-    
+  describe('Test for completedAll', () => {
+
     it('should dispatch an action', () => {
       component.completedAll();
       const action = new TodoActions.CompletedAllAction();
@@ -72,8 +74,8 @@ describe('FooterComponent', () => {
 
   });
 
-  describe("test for countTodos", () => {
-    
+  describe('Test for countTodos', () => {
+
     it('should return 2 undone todos and showFooter is true', () => {
       const todos = [
         { id: 1, text: 'todo', completed: false },
@@ -98,8 +100,8 @@ describe('FooterComponent', () => {
 
   });
 
-  describe("test for currentFilter", () => {
-    
+  describe('Test for currentFilter', () => {
+
     it('should currentFilter be "SHOW_ALL"', () => {
       const action = new FilterActions.SetFilterAction('SHOW_ALL');
       store.dispatch(action);

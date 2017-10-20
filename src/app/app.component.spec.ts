@@ -38,13 +38,13 @@ describe('AppComponent', () => {
 
 
   it('should be created', () => {
-    let store = TestBed.get(Store);
+    const store = TestBed.get(Store);
     spyOn(store, 'dispatch').and.callThrough();
 
     spyOn(localStorage, 'getItem').and.returnValue('[]');
 
-    let fixture = TestBed.createComponent(AppComponent);
-    let component = fixture.componentInstance;
+    const fixture = TestBed.createComponent(AppComponent);
+    const component = fixture.componentInstance;
     fixture.detectChanges();
     expect(component).toBeTruthy();
   });
@@ -53,13 +53,13 @@ describe('AppComponent', () => {
 
     it('should dispatch an action with item in localStorage', () => {
 
-      let store = TestBed.get(Store);
+      const store = TestBed.get(Store);
       spyOn(store, 'dispatch').and.callThrough();
-  
+
       spyOn(localStorage, 'getItem').and.returnValue('[]');
-      
-      let fixture = TestBed.createComponent(AppComponent);
-      let component = fixture.componentInstance;
+
+      const fixture = TestBed.createComponent(AppComponent);
+      const component = fixture.componentInstance;
       fixture.detectChanges();
 
       const action = new TodoActions.PopulateTodosAction([]);
@@ -67,14 +67,13 @@ describe('AppComponent', () => {
     });
 
     it('should dispatch an action with null in localStorage', () => {
-      
-      let store = TestBed.get(Store);
+
+      const store = TestBed.get(Store);
       spyOn(store, 'dispatch').and.callThrough();
-  
+
       spyOn(localStorage, 'getItem').and.returnValue(null);
-  
-      let fixture = TestBed.createComponent(AppComponent);
-      let component = fixture.componentInstance;
+      const fixture = TestBed.createComponent(AppComponent);
+      const component = fixture.componentInstance;
       fixture.detectChanges();
 
       const action = new TodoActions.PopulateTodosAction([]);
@@ -84,19 +83,19 @@ describe('AppComponent', () => {
   });
 
   describe('Test for updateTodos', () => {
-    
+
     it('should called localStorage.setItem', () => {
 
-      let store = TestBed.get(Store);
+      const store = TestBed.get(Store);
       spyOn(store, 'dispatch').and.callThrough();
-  
+
       spyOn(localStorage, 'getItem').and.returnValue('[]');
       spyOn(localStorage, 'setItem').and.callThrough();
-  
-      let fixture = TestBed.createComponent(AppComponent);
-      let component = fixture.componentInstance;
+
+      const fixture = TestBed.createComponent(AppComponent);
+      const component = fixture.componentInstance;
       fixture.detectChanges();
-      
+
       expect(localStorage.setItem).toHaveBeenCalledWith('angular-ngrx-todos', '[]');
     });
 

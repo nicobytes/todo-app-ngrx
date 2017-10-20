@@ -9,7 +9,7 @@ describe('Redux: FilterActions', () => {
       expect(action.type).toEqual(FilterActions.SET_FILTER);
       expect(action.filter).toEqual('new filter');
     });
-    
+
   });
 
 });

@@ -11,9 +11,11 @@ import * as TodoActions from './../../redux/todo/todo.actions';
 import { NewTodoComponent } from './new-todo.component';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'blank-cmp',
   template: ``
 })
+// tslint:disable-next-line:component-class-suffix
 export class BlankCmp {
 }
 
@@ -54,33 +56,33 @@ describe('NewTodoComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe("Test for textField", ()=>{
-    
-    it("should textField be defined", ()=>{
+  describe('Test for textField', () => {
+
+    it('should textField be defined', () => {
       expect(component.textField).toBeDefined();
     });
 
-    it("should textField be valid", ()=>{
+    it('should textField be valid', () => {
       component.textField.setValue('new todo');
       expect(component.textField.valid).toBeTruthy();
     });
 
-    it("should textField be invalid", ()=>{
+    it('should textField be invalid', () => {
       component.textField.setValue('');
       expect(component.textField.invalid).toBeTruthy();
     });
 
   });
 
-  describe("Test for saveTodo", ()=>{
-    
-    it("should dispatch an action", ()=>{
+  describe('Test for saveTodo', () => {
+
+    it('should dispatch an action', () => {
       component.textField.setValue('new todo', {emitEvent: false});
       component.saveTodo();
       expect(store.dispatch).toHaveBeenCalled();
     });
 
-    it("should set value of textField in empty", ()=>{
+    it('should set value of textField in empty', () => {
       component.textField.setValue('new todo', {emitEvent: false});
       component.saveTodo();
       expect(component.textField.value).toEqual('');

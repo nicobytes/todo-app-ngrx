@@ -16,7 +16,7 @@ describe('Redux: FilterReducer', () => {
   });
 
   it('should return the same state with unknown action', () => {
-    let action: any = new FilterActions.SetFilterAction('new filter');
+    const action: any = new FilterActions.SetFilterAction('new filter');
     action.type = 'what';
     const newState = FilterReducer('old state', action);
     expect(newState).toEqual('old state');
