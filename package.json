@@ -26,11 +26,10 @@
     "core-js": "^2.4.1",
     "rxjs": "^5.4.2",
     "todomvc-app-css": "^2.1.0",
-    "todomvc-common": "^1.0.4",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@angular/cli": "1.4.8",
+    "@angular/cli": "^8.1.0",
     "@angular/compiler-cli": "^4.4.6",
     "@angular/language-service": "^4.4.6",
     "@types/jasmine": "~2.5.53",
