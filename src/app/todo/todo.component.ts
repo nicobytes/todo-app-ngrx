@@ -13,7 +13,7 @@ import * as TodoActions from './../../redux/todo/todo.actions';
 export class TodoComponent implements OnInit {
 
   @Input() todo: Todo;
-  @ViewChild('textInput') textInput: ElementRef;
+  @ViewChild('textInput', { static: true }) textInput: ElementRef;
   textField: FormControl;
   checkField: FormControl;
   editing: boolean;
