@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 
 import { TodosModuleState } from '@todos/states';
 import { AddTodoRequest } from '@todos/actions';
-import { getVisibleTodos } from '@todos/selectors';
+import { getVisibleTodos, getCountVisibleTodos, getFilter } from '@todos/selectors';
 import { Todo } from '@todos/models';
 import { Observable } from 'rxjs';
 
@@ -15,12 +15,20 @@ import { Observable } from 'rxjs';
 export class LayoutContainer implements OnInit {
 
   todos$: Observable<Todo[]>;
+  counter$: Observable<number>;
+  filter$: Observable<string>;
 
   constructor(
     private store: Store<TodosModuleState>,
   ) {
     this.todos$ = this.store.pipe(
       select(getVisibleTodos)
+    );
+    this.counter$ = this.store.pipe(
+      select(getCountVisibleTodos)
+    );
+    this.filter$ = this.store.pipe(
+      select(getFilter)
     );
   }
 
@@ -29,6 +37,7 @@ export class LayoutContainer implements OnInit {
 
   onSaveTodo(title: string) {
     const todo: Todo = {
+      id: Math.floor(Math.random() * (300 - 200)) + 200,
       title,
       completed: false
     };

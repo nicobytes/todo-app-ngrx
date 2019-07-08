@@ -41,3 +41,22 @@ export const getCountVisibleTodos = createSelector(
   getVisibleTodos,
   (todos) => todos.length
 );
+
+
+export const getFilter = createSelector(
+  getRouterState,
+  (router) => {
+    if (router.state && router.state.params.filter) {
+      const filter = router.state.params.filter;
+      switch (filter) {
+        default:
+          return 'all';
+        case 'completed':
+          return 'completed';
+        case 'active':
+          return 'active';
+      }
+    }
+    return 'all';
+  }
+);

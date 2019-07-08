@@ -15,14 +15,13 @@ export class FooterComponent implements OnInit {
   @Input() currentFilter: string;
 
   constructor() {
-    // this.readFilterState();
-    // this.readTodosState();
   }
 
   ngOnInit() {
   }
 
   clearCompleted() {
+    // TODO:
     // const action = new TodoActions.ClearCompletedAction();
     // this.store.dispatch(action);
   }
@@ -30,21 +29,6 @@ export class FooterComponent implements OnInit {
   completedAll() {
     // const action = new TodoActions.CompletedAllAction();
     // this.store.dispatch(action);
-  }
-
-  private readTodosState() {
-    // this.store.select('todos')
-    // .subscribe(todos => {
-    //   this.countTodos = todos.filter(t => !t.completed).length;
-    //   this.showFooter = todos.length > 0;
-    // });
-  }
-
-  private readFilterState() {
-    // this.store.select('filter')
-    // .subscribe(fitler => {
-    //   this.currentFilter = fitler;
-    // });
   }
 
 }

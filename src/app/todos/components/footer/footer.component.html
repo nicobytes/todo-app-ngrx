@@ -2,19 +2,19 @@
   <span id="todo-count" class="todo-count">{{ countTodos }} items left</span>
   <ul id="filters" class="filters">
     <li>
-      <a routerLink="/" [class.selected]="currentFilter == 'SHOW_ALL'">
+      <a routerLink="/" [class.selected]="currentFilter == 'all'">
         All
       </a>
     </li>
     <li>
-      <a routerLink="/active" [class.selected]="currentFilter == 'SHOW_ACTIVE'">
+      <a routerLink="/active" [class.selected]="currentFilter == 'active'">
         Active
       </a>
     </li>
     <li>
       <a
         routerLink="/completed"
-        [class.selected]="currentFilter == 'SHOW_COMPLETED'"
+        [class.selected]="currentFilter == 'completed'"
       >
         Completed
       </a>

@@ -22,4 +22,12 @@ export class TodosService {
     );
   }
 
+  createTodo(todo: Todo): Observable<Todo> {
+    const url = `${this.apiUrl}/todos`;
+    return this.http.post(url, {todo})
+    .pipe(
+      map((response: any) => response.todo),
+    );
+  }
+
 }
