@@ -6,7 +6,7 @@ import { tap, take, switchMap, catchError } from 'rxjs/operators';
 
 import { TodosModuleState } from '@todos/states';
 import { getCountAllTodos } from '@todos/selectors';
-import { LoadTodosRequest } from '@todos/actions';
+import { loadTodosRequest } from '@todos/actions';
 
 @Injectable()
 export class TodosGuard implements CanActivate {
@@ -38,7 +38,7 @@ export class TodosGuard implements CanActivate {
   }
 
   private dispatchLoadTodos() {
-    const action = new LoadTodosRequest();
+    const action = loadTodosRequest();
     this.store.dispatch(action);
   }
 

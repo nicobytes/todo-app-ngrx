@@ -1,3 +1,70 @@
+# TodosAppNgrx
+
+```
+ng update @ngrx/store
+```
+
+# Actions
+
+## 1. update actions
+
+```ts
+import { createAction, props } from '@ngrx/store';
+import { Update } from '@ngrx/entity';
+import { Todo } from '@todos/models';
+
+export const addTodo = createAction(
+  '[TodoModule] AddTodo',
+  props<{ todo: Todo }>()
+);
+
+export const deleteTodo = createAction(
+  '[TodoModule] DeleteTodo',
+  props<{ id: number }>()
+);
+
+export const updateTodo = createAction(
+  '[TodoModule] UpdateTodo',
+  props<{ update: Update<Todo> }>()
+);
+
+export const loadTodos = createAction(
+  '[TodoModule] LoadTodos',
+  props<{ todos: Todo[] }>()
+);
+```
+
+## 2. update reducers
+
+```ts
+import { createReducer, on } from '@ngrx/store';
+import * as TodoActions from '@todos/actions/todos.actions';
+import { TodosState, todosAdapter } from '@todos/states';
+
+export const initialState: TodosState = todosAdapter.getInitialState({
+  // additional entity state properties
+});
+
+export const todosReducer = createReducer(
+  initialState,
+  on(TodoActions.loadTodos, (state, { todos }) => {
+    return todosAdapter.addAll(todos, state);
+  }),
+  on(TodoActions.addTodo, (state, { todo }) => {
+    return todosAdapter.addOne(todo, state);
+  }),
+  on(TodoActions.updateTodo, (state, { update }) => {
+    return todosAdapter.updateOne(update, state);
+  }),
+  on(TodoActions.deleteTodo, (state, { id }) => {
+    return todosAdapter.removeOne(id, state);
+  }),
+);
+```
+
+## 3. update effects
+
+```ts
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
@@ -91,3 +158,5 @@ export class TodosEffects {
   ) { }
 
 }
+
+```

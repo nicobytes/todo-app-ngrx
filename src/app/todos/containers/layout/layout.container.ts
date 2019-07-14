@@ -2,8 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { TodosModuleState } from '@todos/states';
-import { AddTodoRequest } from '@todos/actions';
-import { getVisibleTodos, getCountVisibleTodos, getFilter } from '@todos/selectors';
+import { addTodoRequest } from '@todos/actions';
+import { getCountVisibleTodos, getFilter } from '@todos/selectors';
 import { Todo } from '@todos/models';
 import { Observable } from 'rxjs';
 
@@ -38,7 +38,7 @@ export class LayoutContainer implements OnInit {
       title,
       completed: false
     };
-    const action = new AddTodoRequest({todo});
+    const action = addTodoRequest({todo});
     this.store.dispatch(action);
   }
 
