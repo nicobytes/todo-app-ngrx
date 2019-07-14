@@ -1,45 +1,60 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { Update } from '@ngrx/entity';
 
 import { Todo } from '@todos/models';
-
-// import { AppState } from './../../redux/app.reducer';
-// import { Todo } from './../../redux/todo/todo.model';
-// import * as TodoActions from './../../redux/todo/todo.actions';
+import { CustomValidators } from '@app/utils/validators';
 
 @Component({
   selector: 'app-todo',
-  templateUrl: './todo.component.html'
+  templateUrl: './todo.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoComponent implements OnInit {
 
-  @Input() todo: Todo;
+  _todo: Todo;
+
+  @Input()
+  set todo(todo: Todo) {
+    this._todo = todo;
+    this.textField.setValue(this._todo.title);
+    this.checkField.setValue(this._todo.completed, {emitEvent: false});
+  }
   @ViewChild('textInput', { static: true }) textInput: ElementRef;
   textField: FormControl;
   checkField: FormControl;
   editing: boolean;
 
+  @Output() update: EventEmitter<Update<Todo>> = new EventEmitter();
+  @Output() delete: EventEmitter<number> = new EventEmitter();
+
   constructor() {
-    this.textField = new FormControl('', [Validators.required]);
+    this.textField = new FormControl('', [Validators.required, CustomValidators.isBlank]);
     this.checkField = new FormControl(false);
     this.checkField.valueChanges
     .subscribe(state => {
-      // const action = new TodoActions.ToggleAction(this.todo.id);
-      // this.store.dispatch(action);
+      const update = {
+        id: this._todo.id,
+        changes: {
+          completed: state
+        }
+      };
+      this.update.emit(update);
     });
   }
 
   ngOnInit() {
-    this.textField.setValue(this.todo.title);
-    this.checkField.setValue(this.todo.completed, {emitEvent: false});
   }
 
   updateText() {
     if (this.textField.valid && this.editing) {
-      const id = this.todo.id;
-      const newText: string = this.textField.value;
-      // const action = new TodoActions.UpdateAction(id, newText.trim());
-      // this.store.dispatch(action);
+      const update = {
+        id: this._todo.id,
+        changes: {
+          title: this.textField.value
+        }
+      };
+      this.update.emit(update);
       this.editing = false;
     }
   }
@@ -52,9 +67,7 @@ export class TodoComponent implements OnInit {
   }
 
   deleteTodo() {
-    const id = this.todo.id;
-    // const action = new TodoActions.DeleteTodoAction(id);
-    // this.store.dispatch(action);
+    this.delete.emit(this._todo.id);
   }
 
 }

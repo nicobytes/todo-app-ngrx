@@ -3,7 +3,7 @@
     <h1>todos</h1>
     <app-new-todo (saveTodo)="onSaveTodo($event)"></app-new-todo>
   </header>
-  <app-todo-list [todos]="todos$ | async"></app-todo-list>
+  <app-todo-list></app-todo-list>
   <app-footer
     [countTodos]="counter$ | async"
     [currentFilter]="filter$ | async"

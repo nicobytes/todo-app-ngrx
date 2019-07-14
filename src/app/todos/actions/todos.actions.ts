@@ -21,7 +21,7 @@ export class UpdateTodo implements Action {
 
 export class DeleteTodo implements Action {
   readonly type = TodoActionsTypes.DeleteTodo;
-  constructor(public payload: { id: string }) { }
+  constructor(public payload: { id: number }) { }
 }
 
 export class LoadTodos implements Action {

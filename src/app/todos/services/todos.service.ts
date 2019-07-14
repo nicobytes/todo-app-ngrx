@@ -30,4 +30,20 @@ export class TodosService {
     );
   }
 
+  updateTodo(todo: Partial<Todo>): Observable<Todo> {
+    const url = `${this.apiUrl}/todos/${todo.id}`;
+    return this.http.patch(url, {todo})
+    .pipe(
+      map((response: any) => response.todo),
+    );
+  }
+
+  deleteTodo(id: number): Observable<Todo> {
+    const url = `${this.apiUrl}/todos/${id}`;
+    return this.http.delete(url)
+    .pipe(
+      map((response: any) => response.todo),
+    );
+  }
+
 }

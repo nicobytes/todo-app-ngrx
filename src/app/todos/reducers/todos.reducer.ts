@@ -11,7 +11,6 @@ export function todosReducer(
 ) {
   switch (action.type) {
     case TodoActionsTypes.LoadTodos: {
-      console.log(action.payload.todos);
       return todosAdapter.addAll(action.payload.todos, state);
     }
     case TodoActionsTypes.AddTodo: {
@@ -19,6 +18,9 @@ export function todosReducer(
     }
     case TodoActionsTypes.UpdateTodo: {
       return todosAdapter.updateOne(action.payload.update, state);
+    }
+    case TodoActionsTypes.DeleteTodo: {
+      return todosAdapter.removeOne(action.payload.id, state);
     }
     default: {
       return state;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { TodosModuleState } from '@todos/states';
@@ -10,20 +10,17 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.container.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 // tslint:disable-next-line: component-class-suffix
 export class LayoutContainer implements OnInit {
 
-  todos$: Observable<Todo[]>;
   counter$: Observable<number>;
   filter$: Observable<string>;
 
   constructor(
     private store: Store<TodosModuleState>,
   ) {
-    this.todos$ = this.store.pipe(
-      select(getVisibleTodos)
-    );
     this.counter$ = this.store.pipe(
       select(getCountVisibleTodos)
     );

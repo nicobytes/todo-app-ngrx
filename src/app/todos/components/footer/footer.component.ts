@@ -1,13 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-
-// import { AppState } from './../../redux/app.reducer';
-// import * as FilterActions from './../../redux/filter/filter.actions';
-// import * as TodoActions from './../../redux/todo/todo.actions';
-// import { getStateCompleted } from './../../redux/todo/todo.selectors';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
-  templateUrl: './footer.component.html'
+  templateUrl: './footer.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FooterComponent implements OnInit {
 
@@ -20,15 +16,16 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
   }
 
-  clearCompleted() {
-    // TODO:
-    // const action = new TodoActions.ClearCompletedAction();
-    // this.store.dispatch(action);
-  }
+  // TODO:
+  // clearCompleted() {
+  //   const action = new TodoActions.ClearCompletedAction();
+  //   this.store.dispatch(action);
+  // }
 
-  completedAll() {
-    // const action = new TodoActions.CompletedAllAction();
-    // this.store.dispatch(action);
-  }
+  // TODO
+  // completedAll() {
+  //   const action = new TodoActions.CompletedAllAction();
+  //   this.store.dispatch(action);
+  // }
 
 }

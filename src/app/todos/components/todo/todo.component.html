@@ -1,4 +1,4 @@
-<li [class.completed]="todo.completed" [class.editing]="editing">
+<li [class.completed]="_todo.completed" [class.editing]="editing">
   <div class="view">
     <input 
     class="toggle"
@@ -6,7 +6,7 @@
     [formControl]="checkField"/>
     <label
       (dblclick)="activeEditMode()">
-      {{ todo.title }}
+      {{ _todo.title }}
     </label>
     <button class="destroy" (click)="deleteTodo()"></button>
   </div>

@@ -1,11 +1,12 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 import { CustomValidators } from '@utils/validators';
 
 @Component({
   selector: 'app-new-todo',
-  templateUrl: './new-todo.component.html'
+  templateUrl: './new-todo.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewTodoComponent implements OnInit {
 

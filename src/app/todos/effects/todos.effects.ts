@@ -12,7 +12,15 @@ import {
   AddTodoRequest,
   AddTodoSuccess,
   AddTodoFail,
-  TodoUIActionsTypes
+  UpdateTodo,
+  UpdateTodoRequest,
+  UpdateTodoSuccess,
+  UpdateTodoFail,
+  DeleteTodo,
+  DeleteTodoRequest,
+  DeleteTodoSuccess,
+  DeleteTodoFail,
+  TodoUIActionsTypes,
 } from '@todos/actions';
 
 import { TodosService } from '@todos/services/todos.service';
@@ -47,6 +55,38 @@ export class TodosEffects {
               new AddTodoSuccess(),
             ]),
             catchError(error => of(new AddTodoFail({ error }))),
+          );
+      }),
+    );
+
+  @Effect() UpdateTodoRequest$ = this.actions$
+    .pipe(
+      ofType<UpdateTodoRequest>(TodoUIActionsTypes.UpdateTodoRequest),
+      map(action => action.payload.update),
+      switchMap((update) => {
+        return this.todosService.updateTodo(update.changes)
+          .pipe(
+            mergeMap(() => [
+              new UpdateTodo({ update }),
+              new UpdateTodoSuccess(),
+            ]),
+            catchError(error => of(new UpdateTodoFail({ error }))),
+          );
+      }),
+    );
+
+    @Effect() DeleteTodoRequest$ = this.actions$
+    .pipe(
+      ofType<DeleteTodoRequest>(TodoUIActionsTypes.DeleteTodoRequest),
+      map(action => action.payload.id),
+      switchMap((id) => {
+        return this.todosService.deleteTodo(id)
+          .pipe(
+            mergeMap(() => [
+              new DeleteTodo({ id }),
+              new DeleteTodoSuccess(),
+            ]),
+            catchError(error => of(new DeleteTodoFail({ error }))),
           );
       }),
     );
