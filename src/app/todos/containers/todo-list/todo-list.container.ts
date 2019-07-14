@@ -4,8 +4,8 @@ import { Store, select } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
 
 import { TodosModuleState } from '@todos/states';
-import { DeleteTodoRequest, UpdateTodoRequest } from '@todos/actions';
-import { getVisibleTodos, getCountVisibleTodos, getFilter } from '@todos/selectors';
+import { deleteTodoRequest, updateTodoRequest } from '@todos/actions';
+import { getVisibleTodos } from '@todos/selectors';
 import { Todo } from '@todos/models';
 import { Observable } from 'rxjs';
 
@@ -38,12 +38,12 @@ export class TodoListContainer implements OnInit {
   // }
 
   onUpdate(update: Update<Todo>) {
-    const action = new UpdateTodoRequest({update});
+    const action = updateTodoRequest({update});
     this.store.dispatch(action);
   }
 
   onDelete(id: number) {
-    const action = new DeleteTodoRequest({id});
+    const action = deleteTodoRequest({id});
     this.store.dispatch(action);
   }
 }

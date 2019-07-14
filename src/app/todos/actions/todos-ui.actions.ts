@@ -1,88 +1,59 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
 
 import { Todo } from '@todos/models';
 
-export enum TodoUIActionsTypes {
-  LoadTodosRequest   = '[TodoModule] LoadTodosRequest',
-  LoadTodosSuccess   = '[TodoModule] LoadTodosSuccess',
-  LoadTodosFail      = '[TodoModule] LoadTodosFail',
-  AddTodoRequest     = '[TodoModule] AddTodoRequest',
-  AddTodoSuccess     = '[TodoModule] AddTodoSuccess',
-  AddTodoFail        = '[TodoModule] AddTodoTodosFail',
-  UpdateTodoRequest  = '[TodoModule] UpdateTodoRequest',
-  UpdateTodoSuccess  = '[TodoModule] UpdateTodoSuccess',
-  UpdateTodoFail     = '[TodoModule] UpdateTodoFail',
-  DeleteTodoRequest  = '[TodoModule] DeleteTodoRequest',
-  DeleteTodoSuccess  = '[TodoModule] DeleteTodoSuccess',
-  DeleteTodoFail     = '[TodoModule] DeleteTodoFail',
-}
+export const loadTodosRequest = createAction(
+  '[TodoModule] LoadTodosRequest'
+);
 
-export class LoadTodosRequest implements Action {
-  readonly type = TodoUIActionsTypes.LoadTodosRequest;
-}
+export const loadTodosSuccess = createAction(
+  '[TodoModule] LoadTodosSuccess'
+);
 
-export class LoadTodosSuccess implements Action {
-  readonly type = TodoUIActionsTypes.LoadTodosSuccess;
-}
+export const loadTodosFail = createAction(
+  '[TodoModule] LoadTodosFail',
+  props<{ error: string }>()
+);
 
-export class LoadTodosFail implements Action {
-  readonly type = TodoUIActionsTypes.LoadTodosFail;
-  constructor(public payload: { error: string }) { }
-}
+export const addTodoRequest = createAction(
+  '[TodoModule] AddTodoRequest',
+  props<{ todo: Todo }>()
+);
 
-export class AddTodoRequest implements Action {
-  readonly type = TodoUIActionsTypes.AddTodoRequest;
-  constructor(public payload: { todo: Todo }) { }
-}
+export const addTodoSuccess = createAction(
+  '[TodoModule] AddTodoSuccess',
+);
 
-export class AddTodoSuccess implements Action {
-  readonly type = TodoUIActionsTypes.AddTodoSuccess;
-}
+export const addTodoFail = createAction(
+  '[TodoModule] AddTodoFail',
+  props<{ error: string }>()
+);
 
-export class AddTodoFail implements Action {
-  readonly type = TodoUIActionsTypes.AddTodoFail;
-  constructor(public payload: { error: string }) { }
-}
+export const updateTodoRequest = createAction(
+  '[TodoModule] UpdateTodoRequest',
+  props<{ update: Update<Todo> }>()
+);
 
-export class UpdateTodoRequest implements Action {
-  readonly type = TodoUIActionsTypes.UpdateTodoRequest;
-  constructor(public payload: { update: Update<Todo> }) { }
-}
+export const updateTodoSuccess = createAction(
+  '[TodoModule] updateTodoSuccess'
+);
 
-export class UpdateTodoSuccess implements Action {
-  readonly type = TodoUIActionsTypes.UpdateTodoSuccess;
-}
+export const updateTodoFail = createAction(
+  '[TodoModule] UpdateTodoFail',
+  props<{ error: string }>()
+);
 
-export class UpdateTodoFail implements Action {
-  readonly type = TodoUIActionsTypes.UpdateTodoFail;
-  constructor(public payload: { error: string }) { }
-}
+export const deleteTodoRequest = createAction(
+  '[TodoModule] DeleteTodoRequest',
+  props<{ id: number }>()
+);
 
-export class DeleteTodoRequest implements Action {
-  readonly type = TodoUIActionsTypes.DeleteTodoRequest;
-  constructor(public payload: { id: number }) { }
-}
+export const deleteTodoSuccess = createAction(
+  '[TodoModule] DeleteTodoSuccess'
+);
 
-export class DeleteTodoSuccess implements Action {
-  readonly type = TodoUIActionsTypes.DeleteTodoSuccess;
-}
-
-export class DeleteTodoFail implements Action {
-  readonly type = TodoUIActionsTypes.DeleteTodoFail;
-  constructor(public payload: { error: string }) { }
-}
-
-export type TodoUIActions =
-LoadTodosRequest |
-LoadTodosSuccess |
-LoadTodosFail |
-AddTodoRequest |
-AddTodoSuccess |
-AddTodoFail |
-UpdateTodoRequest |
-UpdateTodoSuccess |
-UpdateTodoFail |
-DeleteTodoRequest |
-DeleteTodoSuccess |
-DeleteTodoFail;
+export const deleteTodoFail = createAction(
+  '[TodoModule] DeleteTodoFail',
+  props<{ error: string }>()
+);
