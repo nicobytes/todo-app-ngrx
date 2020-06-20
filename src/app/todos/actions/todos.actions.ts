@@ -21,3 +21,8 @@ export const loadTodos = createAction(
   '[TodoModule] LoadTodos',
   props<{todos: Todo[]}>()
 );
+
+export const selectTodo = createAction(
+  '[TodoModule] selectTodo',
+  props<{id: string }>()
+);

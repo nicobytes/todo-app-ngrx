@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Update } from '@ngrx/entity';
 
 import { Todo } from '@todos/models';
@@ -28,7 +29,9 @@ export class TodoComponent implements OnInit {
   @Output() update: EventEmitter<Update<Todo>> = new EventEmitter();
   @Output() delete: EventEmitter<number> = new EventEmitter();
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
     this.textField = new FormControl('', [Validators.required, CustomValidators.isBlank]);
     this.checkField = new FormControl(false);
     this.checkField.valueChanges

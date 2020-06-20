@@ -9,6 +9,11 @@ export const geTodosState = createSelector(
   state => state.todos
 );
 
+export const getSelectId = createSelector(
+  getTodosModuleState,
+  state => state.todos.selectedId
+);
+
 export const {
   selectAll: getAllTodos,
   selectTotal: getCountAllTodos,
@@ -58,5 +63,13 @@ export const getFilter = createSelector(
       }
     }
     return 'all';
+  }
+);
+
+export const getTodo = createSelector(
+  getEntitiesTodos,
+  getSelectId,
+  (entities, id) => {
+    return entities[id];
   }
 );

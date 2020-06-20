@@ -4,6 +4,7 @@ import { TodosState, todosAdapter } from '@todos/states';
 
 export const initialState: TodosState = todosAdapter.getInitialState({
   // additional entity state properties
+  selectedId: null,
 });
 
 export const todosReducer = createReducer(
@@ -19,5 +20,11 @@ export const todosReducer = createReducer(
   }),
   on(TodoActions.deleteTodo, (state, {id}) => {
     return todosAdapter.removeOne(id, state);
+  }),
+  on(TodoActions.selectTodo, (state, {id}) => {
+    return {
+      ...state,
+      selectedId: id
+    };
   })
 );

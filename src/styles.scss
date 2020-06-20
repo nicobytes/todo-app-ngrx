@@ -1,3 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~todomvc-common/base.css';
 @import '~todomvc-app-css/index.css';
+
+.todo-list li a.view {
+  position: absolute;
+  top: 0;
+  right: 40px;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  margin: auto 0;
+  font-size: 30px;
+  color:green;
+  margin-bottom: 11px;
+  transition: color 0.2s ease-out;
+  text-decoration: none;
+  margin: 0;
+}
+
+.todo-list li  a.view:after{
+  content: '>';
+}
