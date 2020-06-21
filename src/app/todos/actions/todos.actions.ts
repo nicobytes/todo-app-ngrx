@@ -4,7 +4,7 @@ import { Todo } from '@todos/models';
 
 export const addTodo = createAction(
   '[TodoModule] AddTodo',
-  props<{todo: Todo }>()
+  props<{todo: Todo}>()
 );
 
 export const updateTodo = createAction(

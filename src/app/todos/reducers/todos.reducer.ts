@@ -19,5 +19,5 @@ export const todosReducer = createReducer(
   }),
   on(TodoActions.deleteTodo, (state, {id}) => {
     return todosAdapter.removeOne(id, state);
-  })
+  }),
 );

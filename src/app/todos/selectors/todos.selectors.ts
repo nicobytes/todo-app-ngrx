@@ -19,9 +19,8 @@ export const getVisibleTodos = createSelector(
   getAllTodos,
   getRouterState,
   (todos, router) => {
-    if (router.state) {
-      if (router.state.params) {
-        const filter = router.state.params.filter;
+    if (router?.state?.params) {
+      const filter = router.state.params.filter;
         switch (filter) {
           default:
             return todos;
@@ -30,10 +29,20 @@ export const getVisibleTodos = createSelector(
           case 'active':
             return todos.filter(t => !t.completed);
         }
-      }
-      return todos;
     }
-    return [];
+    return todos;
+  }
+);
+
+export const getTodo = createSelector(
+  getEntitiesTodos,
+  getRouterState,
+  (entities, router) => {
+    if (router?.state?.params) {
+      const id = router.state.params.id;
+      return entities[id];
+    }
+    return null;
   }
 );
 
