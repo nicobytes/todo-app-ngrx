@@ -1,0 +1,7 @@
+<ng-container *ngIf="todos$ | async as todos">
+  <section class="main" *ngIf="todos.length > 0">
+    <ul class="todo-list">
+      <app-todo [todo]="todo" *ngFor="let todo of todos"></app-todo>
+    </ul>
+  </section>
+</ng-container>

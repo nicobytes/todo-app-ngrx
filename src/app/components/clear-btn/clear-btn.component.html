@@ -1,0 +1,10 @@
+<ng-container *ngIf="completedTodos$ | async as todos">
+  <button
+    *ngIf="todos.length > 0"
+    type="button"
+    (click)="clear()"
+    class="clear-completed"
+  >
+    Clear completed
+  </button>
+</ng-container>

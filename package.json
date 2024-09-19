@@ -1,10 +1,10 @@
 {
-  "name": "laboratorio-mydayapp-angular",
+  "name": "todo-app-ngrx",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:prod": "http-server ./dist/myapp -p 8080",
+    "start:prod": "http-server ./dist/myapp/browser -p 8080",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

@@ -22,7 +22,13 @@
       "es2020",
       "dom"
     ],
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "paths": {
+      "@components/*": [ "./src/app/components/*"],
+      "@pages/*": [ "./src/app/pages/*"],
+      "@services/*": [ "./src/app/services/*"],
+      "@models/*": ["./src/app/models/*" ],
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
