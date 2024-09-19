@@ -1,7 +1,11 @@
-<ng-container *ngIf="todos$ | async as todos">
-  <section class="main" *ngIf="todos.length > 0">
-    <ul class="todo-list">
-      <app-todo [todo]="todo" *ngFor="let todo of todos"></app-todo>
-    </ul>
-  </section>
-</ng-container>
+@if (todos$ | async; as todos) {
+  @if (todos.length > 0) {
+    <section class="main">
+      <ul class="todo-list">
+        @for (todo of todos; track todo) {
+          <app-todo [todo]="todo"></app-todo>
+        }
+      </ul>
+    </section>
+  }
+}

@@ -1,10 +1,11 @@
-<ng-container *ngIf="completedTodos$ | async as todos">
-  <button
-    *ngIf="todos.length > 0"
-    type="button"
-    (click)="clear()"
-    class="clear-completed"
-  >
-    Clear completed
-  </button>
-</ng-container>
+@if (completedTodos$ | async; as todos) {
+  @if (todos.length > 0) {
+    <button
+      type="button"
+      (click)="clear()"
+      class="clear-completed"
+      >
+      Clear completed
+    </button>
+  }
+}

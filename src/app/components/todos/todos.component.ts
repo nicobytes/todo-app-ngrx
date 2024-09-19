@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { NgIf, AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Filter } from '@models/filter.model';
 import { TodoComponent } from '@components/todo/todo.component';
@@ -8,7 +8,7 @@ import { TodoService } from '@services/todo.service';
 
 @Component({
   standalone: true,
-  imports: [TodoComponent, NgIf, AsyncPipe, NgFor],
+  imports: [TodoComponent, AsyncPipe],
   selector: 'app-todos',
   templateUrl: './todos.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

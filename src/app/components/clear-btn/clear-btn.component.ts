@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 import { TodoService } from '@services/todo.service';
 
 @Component({
   standalone: true,
-  imports: [NgIf, AsyncPipe],
+  imports: [AsyncPipe],
   selector: 'app-clear-btn',
   templateUrl: './clear-btn.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

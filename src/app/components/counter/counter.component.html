@@ -1,5 +1,11 @@
-<span class="todo-count" *ngIf="pendingTodos$ | async as pendingTodos">
-  <strong>{{ pendingTodos.length }} </strong>
-  <span *ngIf="pendingTodos.length === 1; else elseBlock">item </span>
-  <ng-template #elseBlock>items </ng-template> left
-</span>
+@if (pendingTodos$ | async; as pendingTodos) {
+  <span class="todo-count">
+    <strong>{{ pendingTodos.length }} </strong>
+    @if (pendingTodos.length === 1) {
+      <span>item </span>
+    } @else {
+      items
+    }
+    left
+  </span>
+}

@@ -1,21 +1,25 @@
-<ng-container *ngIf="todos$ | async as todos">
-  <footer class="footer" *ngIf="todos.length > 0">
-    <app-counter></app-counter>
-    <ul class="filters" *ngIf="filter$ | async as filter">
-      <li>
-        <a routerLink="/" [class.selected]="filter === 'all'">All</a>
-      </li>
-      <li>
-        <a routerLink="/pending" [class.selected]="filter === 'pending'"
-          >Pending</a
-        >
-      </li>
-      <li>
-        <a routerLink="/completed" [class.selected]="filter === 'completed'"
-          >Completed</a
-        >
-      </li>
-    </ul>
-    <app-clear-btn></app-clear-btn>
-  </footer>
-</ng-container>
+@if (todos$ | async; as todos) {
+  @if (todos.length > 0) {
+    <footer class="footer">
+      <app-counter></app-counter>
+      @if (filter$ | async; as filter) {
+        <ul class="filters">
+          <li>
+            <a routerLink="/" [class.selected]="filter === 'all'">All</a>
+          </li>
+          <li>
+            <a routerLink="/pending" [class.selected]="filter === 'pending'"
+              >Pending</a
+              >
+            </li>
+            <li>
+              <a routerLink="/completed" [class.selected]="filter === 'completed'"
+                >Completed</a
+                >
+              </li>
+            </ul>
+          }
+          <app-clear-btn></app-clear-btn>
+        </footer>
+      }
+    }
