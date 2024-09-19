@@ -1,32 +1,29 @@
 import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Filter } from '@models/filter.model';
 import { TodoComponent } from '@components/todo/todo.component';
 
-import { TodoService } from '@services/todo.service';
+import { TodosStore } from '@services/todos.store';
 
 @Component({
   standalone: true,
-  imports: [TodoComponent, AsyncPipe],
+  imports: [TodoComponent],
   selector: 'app-todos',
   templateUrl: './todos.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodosComponent implements OnInit {
-  private todoService = inject(TodoService);
+  readonly store = inject(TodosStore);
   private route = inject(ActivatedRoute);
-
-  todos$ = this.todoService.getTodosByFilter();
 
   constructor() {
     this.route.paramMap.subscribe((params) => {
       const filter = params.get('filter') as Filter;
-      this.todoService.changeFilter(filter || 'all');
+      this.store.changeFilter(filter || 'all');
     });
   }
 
   ngOnInit(): void {
-    this.todoService.readStorage();
+    // this.store.readStorage();
   }
 }

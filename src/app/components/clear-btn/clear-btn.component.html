@@ -1,11 +1,13 @@
-@if (completedTodos$ | async; as todos) {
-  @if (todos.length > 0) {
+@let completedTodos = store.completedTodos();
+
+
+  @if (completedTodos.length > 0) {
     <button
       type="button"
-      (click)="clear()"
+      (click)="store.clearCompleted()"
       class="clear-completed"
       >
       Clear completed
     </button>
   }
-}
+

@@ -1,25 +1,26 @@
-@if (todos$ | async; as todos) {
-  @if (todos.length > 0) {
-    <footer class="footer">
-      <app-counter></app-counter>
-      @if (filter$ | async; as filter) {
-        <ul class="filters">
-          <li>
-            <a routerLink="/" [class.selected]="filter === 'all'">All</a>
+@let todos = store.todos();
+
+@if (todos.length > 0) {
+  <footer class="footer">
+    <app-counter />
+    @let filter = store.filter();
+
+      <ul class="filters">
+        <li>
+          <a routerLink="/" [class.selected]="filter === 'all'">All</a>
+        </li>
+        <li>
+          <a routerLink="/pending" [class.selected]="filter === 'pending'"
+            >Pending</a
+            >
           </li>
           <li>
-            <a routerLink="/pending" [class.selected]="filter === 'pending'"
-              >Pending</a
+            <a routerLink="/completed" [class.selected]="filter === 'completed'"
+              >Completed</a
               >
             </li>
-            <li>
-              <a routerLink="/completed" [class.selected]="filter === 'completed'"
-                >Completed</a
-                >
-              </li>
-            </ul>
-          }
-          <app-clear-btn></app-clear-btn>
-        </footer>
-      }
+          </ul>
+
+        <app-clear-btn />
+      </footer>
     }

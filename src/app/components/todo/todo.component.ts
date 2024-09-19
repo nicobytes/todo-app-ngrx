@@ -4,7 +4,7 @@ import { NgClass } from '@angular/common';
 
 
 import { Todo } from '@models/todo.model';
-import { TodoService } from '@services/todo.service';
+import { TodosStore } from '@services/todos.store';
 
 @Component({
   standalone: true,
@@ -14,7 +14,7 @@ import { TodoService } from '@services/todo.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoComponent {
-  private todoService = inject(TodoService);
+  readonly store = inject(TodosStore);
   private cdRef = inject(ChangeDetectorRef);
 
   _todo!: Todo;
@@ -28,18 +28,18 @@ export class TodoComponent {
   @ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
 
   toggle() {
-    this.todoService.toggle(this._todo.id);
+    this.store.toggle(this._todo.id);
   }
 
   update() {
     const title = this.input.value.trim();
     if (title !== '') {
-      this.todoService.update(this._todo.id, { title });
+      this.store.update(this._todo.id, { title });
     }
   }
 
   remove() {
-    this.todoService.remove(this._todo.id);
+    this.store.remove(this._todo.id);
   }
 
   escape() {
