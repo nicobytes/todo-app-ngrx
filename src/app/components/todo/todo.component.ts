@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  Input,
-  ViewChild,
-  ChangeDetectorRef,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild, ChangeDetectorRef, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 
@@ -21,6 +14,9 @@ import { TodoService } from '@services/todo.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoComponent {
+  private todoService = inject(TodoService);
+  private cdRef = inject(ChangeDetectorRef);
+
   _todo!: Todo;
   @Input()
   set todo(todo: Todo) {
@@ -30,11 +26,6 @@ export class TodoComponent {
   editingMode = false;
   input = new FormControl('', { nonNullable: true });
   @ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
-
-  constructor(
-    private todoService: TodoService,
-    private cdRef: ChangeDetectorRef
-  ) {}
 
   toggle() {
     this.todoService.toggle(this._todo.id);

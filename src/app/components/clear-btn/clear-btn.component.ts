@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 
 import { TodoService } from '@services/todo.service';
@@ -11,10 +11,10 @@ import { TodoService } from '@services/todo.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClearBtnComponent {
+  private todoService = inject(TodoService);
+
 
   completedTodos$ = this.todoService.getCompletedTodos();
-
-  constructor(private todoService: TodoService) {}
 
   clear() {
     this.todoService.clearCompleted();

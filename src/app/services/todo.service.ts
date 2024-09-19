@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -10,13 +10,13 @@ import { StorageService } from '@services/storage.service';
   providedIn: 'root',
 })
 export class TodoService {
+  private storage = inject(StorageService);
+
   private todos: Todo[] = [];
   private todosBS = new BehaviorSubject<Todo[]>(this.todos);
 
   private filter: Filter = 'all';
   private filterBS = new BehaviorSubject<Filter>(this.filter);
-
-  constructor(private storage: StorageService) {}
 
   getTodos() {
     return this.todosBS.asObservable();

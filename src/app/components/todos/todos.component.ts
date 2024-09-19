@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Filter } from '@models/filter.model';
@@ -14,9 +14,12 @@ import { TodoService } from '@services/todo.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodosComponent implements OnInit {
+  private todoService = inject(TodoService);
+  private route = inject(ActivatedRoute);
+
   todos$ = this.todoService.getTodosByFilter();
 
-  constructor(private todoService: TodoService, private route: ActivatedRoute) {
+  constructor() {
     this.route.paramMap.subscribe((params) => {
       const filter = params.get('filter') as Filter;
       this.todoService.changeFilter(filter || 'all');
