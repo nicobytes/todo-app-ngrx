@@ -1,5 +1,4 @@
-import { inject } from '@angular/core';
-import { computed } from '@angular/core';
+import { computed, effect, inject, untracked } from '@angular/core';
 import {
   signalStore,
   withState,
@@ -46,68 +45,72 @@ export const TodosStore = signalStore(
       return state.todos().filter((todo) => todo.completed);
     }),
   })),
-  withMethods((store, storage = inject(StorageService)) => {
-    const persist = (): void => {
-      storage.save(store.todos());
-    };
-
-    return {
-      add(title: string): void {
-        const newTodo = {
-          id: 'id_' + Date.now(),
-          title,
-          completed: false,
-        };
-        const todos = store.todos();
-        patchState(store, {
-          todos: [...todos, newTodo],
-        });
-        persist();
-      },
-      remove(id: string): void {
-        const todos = store.todos();
-        patchState(store, {
-          todos: todos.filter((todo) => todo.id !== id),
-        });
-        persist();
-      },
-      toggle(id: string): void {
-        patchState(store, (state) => ({
-          todos: state.todos.map((todo) =>
-            todo.id === id ? { ...todo, completed: !todo.completed } : todo,
-          ),
-        }));
-        persist();
-      },
-      update(id: string, dto: UpdateTodoDto): void {
-        patchState(store, (state) => ({
-          todos: state.todos.map((todo) => {
-            if (todo.id === id) {
-              return {
-                ...todo,
-                ...dto,
-              };
-            }
-            return todo;
-          }),
-        }));
-        persist();
-      },
-      changeFilter(change: Filter) {
-        patchState(store, { filter: change });
-      },
-      clearCompleted(): void {
-        patchState(store, (state) => ({
-          todos: state.todos.filter((todo) => !todo.completed),
-        }));
-        persist();
-      },
-    };
-  }),
+  withMethods((store) => ({
+    add(title: string): void {
+      const newTodo = {
+        id: 'id_' + Date.now(),
+        title,
+        completed: false,
+      };
+      const todos = store.todos();
+      patchState(store, {
+        todos: [...todos, newTodo],
+      });
+    },
+    remove(id: string): void {
+      const todos = store.todos();
+      patchState(store, {
+        todos: todos.filter((todo) => todo.id !== id),
+      });
+    },
+    toggle(id: string): void {
+      patchState(store, (state) => ({
+        todos: state.todos.map((todo) =>
+          todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+        ),
+      }));
+    },
+    update(id: string, dto: UpdateTodoDto): void {
+      patchState(store, (state) => ({
+        todos: state.todos.map((todo) => {
+          if (todo.id === id) {
+            return {
+              ...todo,
+              ...dto,
+            };
+          }
+          return todo;
+        }),
+      }));
+    },
+    changeFilter(change: Filter) {
+      patchState(store, { filter: change });
+    },
+    clearCompleted(): void {
+      patchState(store, (state) => ({
+        todos: state.todos.filter((todo) => !todo.completed),
+      }));
+    },
+  })),
   withHooks({
     onInit(store) {
       const storage = inject(StorageService);
       patchState(store, { todos: storage.readStorage() });
+
+      // TODO (signalMethod — Caso 1): importar signalMethod desde '@ngrx/signals'
+      // TODO (signalMethod — Caso 1): crear persistTodos = signalMethod<Todo[]>((todos) => storage.save(todos))
+      // TODO (signalMethod — Caso 1): conectar con persistTodos(store.todos)
+      // TODO (signalMethod — Caso 1): eliminar effect + untracked de abajo
+      effect(() => {
+        const todos = store.todos();
+
+        // untracked: storage.save es un side effect imperativo — no debe re-trackearse.
+        // Si aquí leyéramos/escribiéramos otro signal sin untracked, el effect
+        // se re-ejecutaría en bucle (implicit tracking).
+        untracked(() => {
+          storage.save(todos);
+        });
+      });
     },
   }),
 );

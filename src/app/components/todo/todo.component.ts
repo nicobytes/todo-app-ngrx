@@ -3,10 +3,12 @@ import {
   Component,
   ElementRef,
   ChangeDetectorRef,
+  effect,
   inject,
   viewChild,
   input,
-  effect,
+  signal,
+  untracked,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
@@ -25,13 +27,26 @@ export class TodoComponent {
   private cdRef = inject(ChangeDetectorRef);
 
   readonly todo = input.required<Todo>();
+  readonly syncCount = signal(0);
   editingMode = false;
   titleControl = new FormControl('', { nonNullable: true });
   readonly inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
   constructor() {
+    // TODO (signalMethod — Caso 2): importar signalMethod desde '@ngrx/signals'
+    // TODO (signalMethod — Caso 2): crear syncTitle = signalMethod<Todo>((todo) => { ... })
+    // TODO (signalMethod — Caso 2): conectar con syncTitle(this.todo) en el constructor
+    // TODO (signalMethod — Caso 2): eliminar effect + untracked de abajo
     effect(() => {
-      this.titleControl.setValue(this.todo().title);
+      const title = this.todo().title;
+
+      // untracked: setValue y syncCount.update son writes imperativos.
+      // Sin untracked, syncCount quedaría trackeado → el effect se re-dispara
+      // al incrementar el contador → bucle infinito (implicit tracking).
+      untracked(() => {
+        this.titleControl.setValue(title);
+        this.syncCount.update((count) => count + 1);
+      });
     });
   }
 

@@ -35,7 +35,8 @@
   },
   "exclude": [
     "playwright.config.ts",
-    "e2e/**/*"
+    "e2e/**/*",
+    "**/*.spec.ts"
   ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
