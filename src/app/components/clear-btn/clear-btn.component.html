@@ -1,13 +1,7 @@
 @let completedTodos = store.completedTodos();
 
-
-  @if (completedTodos.length > 0) {
-    <button
-      type="button"
-      (click)="store.clearCompleted()"
-      class="clear-completed"
-      >
-      Clear completed
-    </button>
-  }
-
+@if (completedTodos.length > 0) {
+  <button type="button" (click)="store.clearCompleted()" class="clear-completed">
+    Clear completed
+  </button>
+}

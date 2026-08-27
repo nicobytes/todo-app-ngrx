@@ -5,22 +5,18 @@
     <app-counter />
     @let filter = store.filter();
 
-      <ul class="filters">
-        <li>
-          <a routerLink="/" [class.selected]="filter === 'all'">All</a>
-        </li>
-        <li>
-          <a routerLink="/pending" [class.selected]="filter === 'pending'"
-            >Pending</a
-            >
-          </li>
-          <li>
-            <a routerLink="/completed" [class.selected]="filter === 'completed'"
-              >Completed</a
-              >
-            </li>
-          </ul>
+    <ul class="filters">
+      <li>
+        <a routerLink="/" [class.selected]="filter === 'all'">All</a>
+      </li>
+      <li>
+        <a routerLink="/pending" [class.selected]="filter === 'pending'">Pending</a>
+      </li>
+      <li>
+        <a routerLink="/completed" [class.selected]="filter === 'completed'">Completed</a>
+      </li>
+    </ul>
 
-        <app-clear-btn />
-      </footer>
-    }
+    <app-clear-btn />
+  </footer>
+}

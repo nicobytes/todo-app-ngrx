@@ -1,0 +1,8 @@
+/dist
+/coverage
+/node_modules
+/.angular
+/pnpm-lock.yaml
+/test-results
+/playwright-report
+/playwright/.cache

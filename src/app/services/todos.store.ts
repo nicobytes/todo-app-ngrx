@@ -1,13 +1,22 @@
-import { signalStore, withState, withMethods, patchState, withComputed } from '@ngrx/signals';
+import { inject } from '@angular/core';
+import { computed } from '@angular/core';
+import {
+  signalStore,
+  withState,
+  withMethods,
+  patchState,
+  withComputed,
+  withHooks,
+} from '@ngrx/signals';
 
 import { Todo, UpdateTodoDto } from '@models/todo.model';
 import { Filter } from '@models/filter.model';
-import { computed } from '@angular/core';
+import { StorageService } from '@services/storage.service';
 
-type TodosState = {
+interface TodosState {
   todos: Todo[];
   filter: Filter;
-};
+}
 
 const initialState: TodosState = {
   todos: [],
@@ -37,51 +46,68 @@ export const TodosStore = signalStore(
       return state.todos().filter((todo) => todo.completed);
     }),
   })),
-  withMethods((store) => ({
-    add(title: string): void {
-      const newTodo = {
-        id: 'id_' + Date.now(),
-        title,
-        completed: false,
-      };
-      const todos = store.todos();
-      patchState(store, {
-        todos: [...todos, newTodo],
-      });
+  withMethods((store, storage = inject(StorageService)) => {
+    const persist = (): void => {
+      storage.save(store.todos());
+    };
+
+    return {
+      add(title: string): void {
+        const newTodo = {
+          id: 'id_' + Date.now(),
+          title,
+          completed: false,
+        };
+        const todos = store.todos();
+        patchState(store, {
+          todos: [...todos, newTodo],
+        });
+        persist();
+      },
+      remove(id: string): void {
+        const todos = store.todos();
+        patchState(store, {
+          todos: todos.filter((todo) => todo.id !== id),
+        });
+        persist();
+      },
+      toggle(id: string): void {
+        patchState(store, (state) => ({
+          todos: state.todos.map((todo) =>
+            todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+          ),
+        }));
+        persist();
+      },
+      update(id: string, dto: UpdateTodoDto): void {
+        patchState(store, (state) => ({
+          todos: state.todos.map((todo) => {
+            if (todo.id === id) {
+              return {
+                ...todo,
+                ...dto,
+              };
+            }
+            return todo;
+          }),
+        }));
+        persist();
+      },
+      changeFilter(change: Filter) {
+        patchState(store, { filter: change });
+      },
+      clearCompleted(): void {
+        patchState(store, (state) => ({
+          todos: state.todos.filter((todo) => !todo.completed),
+        }));
+        persist();
+      },
+    };
+  }),
+  withHooks({
+    onInit(store) {
+      const storage = inject(StorageService);
+      patchState(store, { todos: storage.readStorage() });
     },
-    remove(id: string): void {
-      const todos = store.todos();
-      patchState(store, {
-        todos: todos.filter((todo) => todo.id !== id),
-      });
-    },
-    toggle(id: string): void {
-      patchState(store, (state) => ({
-        todos: state.todos.map((todo) =>
-          todo.id === id ? { ...todo, completed: !todo.completed } : todo
-        ),
-      })) ;
-    },
-    update(id: string, dto: UpdateTodoDto): void {
-      patchState(store, (state) => ({
-        todos: state.todos.map((todo) => {
-          if (todo.id === id) {
-            return {
-              ...todo,
-              ...dto,
-            };
-          }
-          return todo;
-        }),
-      })) ;
-    },
-    changeFilter(change: Filter) {
-      patchState(store, { filter: change });
-    },
-    clearCompleted(): void {
-      patchState(store, (state) => ({
-        todos: state.todos.filter((todo) => !todo.completed),
-      })) ;
-    },
-  }))
+  }),
 );

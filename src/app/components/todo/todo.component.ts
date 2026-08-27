@@ -1,13 +1,20 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild, ChangeDetectorRef, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  ChangeDetectorRef,
+  inject,
+  viewChild,
+  input,
+  effect,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
-
 
 import { Todo } from '@models/todo.model';
 import { TodosStore } from '@services/todos.store';
 
 @Component({
-  standalone: true,
   imports: [NgClass, ReactiveFormsModule],
   selector: 'app-todo',
   templateUrl: './todo.component.html',
@@ -17,39 +24,40 @@ export class TodoComponent {
   readonly store = inject(TodosStore);
   private cdRef = inject(ChangeDetectorRef);
 
-  _todo!: Todo;
-  @Input()
-  set todo(todo: Todo) {
-    this._todo = todo;
-    this.input.setValue(this._todo.title);
-  }
+  readonly todo = input.required<Todo>();
   editingMode = false;
-  input = new FormControl('', { nonNullable: true });
-  @ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
+  titleControl = new FormControl('', { nonNullable: true });
+  readonly inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
+
+  constructor() {
+    effect(() => {
+      this.titleControl.setValue(this.todo().title);
+    });
+  }
 
   toggle() {
-    this.store.toggle(this._todo.id);
+    this.store.toggle(this.todo().id);
   }
 
   update() {
-    const title = this.input.value.trim();
+    const title = this.titleControl.value.trim();
     if (title !== '') {
-      this.store.update(this._todo.id, { title });
+      this.store.update(this.todo().id, { title });
     }
   }
 
   remove() {
-    this.store.remove(this._todo.id);
+    this.store.remove(this.todo().id);
   }
 
   escape() {
     this.editingMode = !this.editingMode;
-    this.input.setValue(this._todo.title);
+    this.titleControl.setValue(this.todo().title);
   }
 
   enableEditingMode() {
     this.editingMode = !this.editingMode;
     this.cdRef.detectChanges();
-    this.inputElement.nativeElement.focus();
+    this.inputElement().nativeElement.focus();
   }
 }

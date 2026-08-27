@@ -16,15 +16,15 @@ MyDayApp es una aplicación para gestionar tareas de forma sencilla, fácil y en
 
 1. Hacer el fork de este proyecto en tu espacio personal
 1. Clonar el repositorio desde tu espacio personal en tu computadora
-1. Instalar dependencias, con el comando `npm install`
-1. Comprobar ambiente de desarrollo, con el comando `ng serve`
+1. Instalar dependencias, con el comando `pnpm install`
+1. Comprobar ambiente de desarrollo, con el comando `pnpm start`
 
 ---
+
 ### Instalación de ambiente para pruebas e2e
 
-1. Instalar requerimientos para pruebas e2e, con el comando  `npm run e2e:install`
-1. Comprobar que se corran pruebas e2e, con el comando  `npm run e2e`
-
+1. Instalar requerimientos para pruebas e2e, con el comando `pnpm run e2e:install`
+1. Comprobar que se corran pruebas e2e, con el comando `pnpm run e2e`
 
 ## Configuración
 
@@ -37,7 +37,7 @@ El proyecto ya viene con una configuración inicial, la cual es la tipica usanda
 ├── e2e
 ├── karma.conf.js
 ├── node_modules
-├── package-lock.json
+├── pnpm-lock.yaml
 ├── package.json
 ├── playwright.config.ts
 ├── src
@@ -91,10 +91,10 @@ Se verían de la siguiente manera:
 
 ### Scripts
 
-- El comando `npm run build` corre webpack en modo producción y deja los archivos de producción en la carpeta `/dis/app`.
-- El comando `npm run e2e` corre las [pruebas e2e](#pruebas) usando [playwright](https://playwright.dev/).
-- El comando `npm run start` genera un servidor en modo desarrollo el cual tiene livereload.
-- El comando `npm run start:prod` inicia un servidor usando `http-server` con la carpeta de `/dist/myapp` que es la carpeta en donde quedan los archivos para producción, recuerda antes de correr este comando asegurarte de correr `npm run build`.
+- El comando `pnpm run build` corre webpack en modo producción y deja los archivos de producción en la carpeta `/dist/myapp`.
+- El comando `pnpm run e2e` corre las [pruebas e2e](#pruebas) usando [playwright](https://playwright.dev/).
+- El comando `pnpm start` genera un servidor en modo desarrollo el cual tiene livereload.
+- El comando `pnpm run start:prod` inicia un servidor usando `http-server` con la carpeta de `/dist/myapp` que es la carpeta en donde quedan los archivos para producción, recuerda antes de correr este comando asegurarte de correr `pnpm run build`.
 
 ## Funcionalidades
 
@@ -162,9 +162,9 @@ Desplegar la aplicación en alguno de los siguientes servicios: GitHub Pages, Ne
 
 ## Pruebas
 
-Las pruebas e2e corren bajo playwright con el comando `npm run e2e` y ya esta incluido como parte de las dependencias del proyecto, sin embargo, antes de correr el comando, asegúrate de correr `npm run e2e:install` para instalar los requerimientos de playwright para correr pruebas.
+Las pruebas e2e corren bajo playwright con el comando `pnpm run e2e` y ya esta incluido como parte de las dependencias del proyecto, sin embargo, antes de correr el comando, asegúrate de correr `pnpm run e2e:install` para instalar los requerimientos de playwright para correr pruebas.
 
-Cuando corras el comando `npm run e2e` por primera vez y antes de crear todas las [funcionalidades](#funcionalidades), las pruebas van a fallar y se verán así:
+Cuando corras el comando `pnpm run e2e` por primera vez y antes de crear todas las [funcionalidades](#funcionalidades), las pruebas van a fallar y se verán así:
 
 ![failed](https://i.imgur.com/C0jGlXl.png)
 
@@ -172,7 +172,7 @@ Una vez desarrolles todas las funcionalidades deberías pasar todas las pruebas 
 
 ![success](https://i.imgur.com/3wL4dO2.png)
 
-> Puedes ir corriendo el comando `npm run e2e` de las funcionalidades que vayas creando para ir evaluando que vas por buen camino.
+> Puedes ir corriendo el comando `pnpm run e2e` de las funcionalidades que vayas creando para ir evaluando que vas por buen camino.
 
 ## Licencia
 

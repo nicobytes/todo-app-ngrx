@@ -1,24 +1,19 @@
 <li
   [ngClass]="{
-    completed: _todo.completed,
-    editing: editingMode
+    completed: todo().completed,
+    editing: editingMode,
   }"
   (dblclick)="enableEditingMode()"
 >
   <div class="view">
-    <input
-      [checked]="_todo.completed"
-      (change)="toggle()"
-      class="toggle"
-      type="checkbox"
-    />
-    <label>{{ _todo.title }}</label>
+    <input [checked]="todo().completed" (change)="toggle()" class="toggle" type="checkbox" />
+    <label>{{ todo().title }}</label>
     <button type="button" class="destroy" (click)="remove()"></button>
   </div>
   <input
     #inputElement
     class="edit"
-    [formControl]="input"
+    [formControl]="titleControl"
     (keyup.enter)="update()"
     (keyup.esc)="escape()"
   />

@@ -32,20 +32,16 @@ export class TodoService {
           return todos.filter((todo) => todo.completed);
         }
         return todos;
-      })
+      }),
     );
   }
 
   getPendingTodos() {
-    return this.getTodos().pipe(
-      map((todos) => todos.filter((todo) => !todo.completed))
-    );
+    return this.getTodos().pipe(map((todos) => todos.filter((todo) => !todo.completed)));
   }
 
   getCompletedTodos() {
-    return this.getTodos().pipe(
-      map((todos) => todos.filter((todo) => todo.completed))
-    );
+    return this.getTodos().pipe(map((todos) => todos.filter((todo) => todo.completed)));
   }
 
   readStorage() {
@@ -70,7 +66,7 @@ export class TodoService {
 
   toggle(id: Todo['id']): void {
     this.todos = this.todos.map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo,
     );
     this.save();
   }

@@ -5,7 +5,7 @@ const config: PlaywrightTestConfig = {
   testDir: './e2e',
   timeout: 30 * 1000,
   expect: {
-    timeout: 5000
+    timeout: 5000,
   },
   fullyParallel: false,
   forbidOnly: !!process.env['CI'],
@@ -25,9 +25,9 @@ const config: PlaywrightTestConfig = {
       },
     },
   ],
-  outputDir: "test-results/",
+  outputDir: 'test-results/',
   webServer: {
-    command: 'npm run start:prod',
+    command: 'pnpm run start:prod',
     port: 8080,
   },
 };

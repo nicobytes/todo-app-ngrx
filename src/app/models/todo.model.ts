@@ -4,5 +4,5 @@ export interface Todo {
   completed: boolean;
 }
 
-export interface CreateTodoDto extends Omit<Todo, 'id'> {}
-export interface UpdateTodoDto extends Partial<CreateTodoDto> {}
+export type CreateTodoDto = Omit<Todo, 'id'>;
+export type UpdateTodoDto = Partial<CreateTodoDto>;
