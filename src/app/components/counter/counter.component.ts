@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 
-import { TodoService } from '@services/todo.service';
+import { TodosStore } from '@services/todos.store';
 
 @Component({
   standalone: true,
@@ -11,9 +11,5 @@ import { TodoService } from '@services/todo.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CounterComponent{
-  private todoService = inject(TodoService);
-
-
-  pendingTodos$ = this.todoService.getPendingTodos();
-
+  readonly store = inject(TodosStore);
 }
