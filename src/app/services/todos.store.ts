@@ -1,4 +1,4 @@
-import { computed, effect, inject, untracked } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import {
   signalStore,
   withState,
@@ -6,6 +6,7 @@ import {
   patchState,
   withComputed,
   withHooks,
+  signalMethod,
 } from '@ngrx/signals';
 
 import { Todo, UpdateTodoDto } from '@models/todo.model';
@@ -97,20 +98,10 @@ export const TodosStore = signalStore(
       const storage = inject(StorageService);
       patchState(store, { todos: storage.readStorage() });
 
-      // TODO (signalMethod — Caso 1): importar signalMethod desde '@ngrx/signals'
-      // TODO (signalMethod — Caso 1): crear persistTodos = signalMethod<Todo[]>((todos) => storage.save(todos))
-      // TODO (signalMethod — Caso 1): conectar con persistTodos(store.todos)
-      // TODO (signalMethod — Caso 1): eliminar effect + untracked de abajo
-      effect(() => {
-        const todos = store.todos();
-
-        // untracked: storage.save es un side effect imperativo — no debe re-trackearse.
-        // Si aquí leyéramos/escribiéramos otro signal sin untracked, el effect
-        // se re-ejecutaría en bucle (implicit tracking).
-        untracked(() => {
-          storage.save(todos);
-        });
+      const persistTodos = signalMethod<Todo[]>((todos) => {
+        storage.save(todos);
       });
+      persistTodos(store.todos);
     },
   }),
 );

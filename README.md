@@ -11,6 +11,12 @@ components, signals, reactive persistence, and route-based filtering.
 MyDayApp lets you create, complete, edit, and filter todos with data persisted
 to `localStorage`. The UI follows the classic TodoMVC layout and styling.
 
+This repo also includes a pedagogical **`signalMethod` demo** at
+[`/signal-method`](http://localhost:4200/signal-method), inspired by
+[Daniel Sogl’s article](https://danielsogl.medium.com/enhancing-side-effects-in-angular-with-ngrxs-signalmethod-54877e757686).
+Use it as a warm-up before migrating the real Todo side effects — full walkthrough in
+[`tutos/signal_method_youtube_proposal.md`](tutos/signal_method_youtube_proposal.md).
+
 ## Tech Stack
 
 | Layer       | Choice                                         |
@@ -44,7 +50,9 @@ src/app/
 │   ├── footer/       # Filters + counter + clear button
 │   ├── counter/
 │   └── clear-btn/
-├── pages/home/       # App shell layout
+├── pages/
+│   ├── home/                 # Todo app shell
+│   └── signal-method-demo/   # Pedagogical signalMethod page (/signal-method)
 ├── services/
 │   ├── todos.store.ts    # Signal Store (source of truth)
 │   └── storage.service.ts
@@ -54,7 +62,10 @@ src/app/
 **State management:** `TodosStore` holds todos and the active filter. Mutations
 go through store methods (`add`, `toggle`, `update`, etc.). Persistence reacts
 to `store.todos` changes via `effect` (Phase 1) — migratable to `signalMethod`
-(Phase 2); see the tutorial doc.
+(Phase 2); see the tutorial doc and the `/signal-method` demo.
+
+**Routes:** `/`, `/pending`, `/completed`, and `/signal-method` (registered
+before `:filter` so it is not treated as a filter).
 
 **Path aliases:** `@components/*`, `@services/*`, `@models/*`, `@pages/*`
 
@@ -73,6 +84,8 @@ pnpm start
 ```
 
 Open [http://localhost:4200](http://localhost:4200).
+
+Pedagogical demo: [http://localhost:4200/signal-method](http://localhost:4200/signal-method).
 
 ### E2E setup (first time)
 

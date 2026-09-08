@@ -3,15 +3,14 @@ import {
   Component,
   ElementRef,
   ChangeDetectorRef,
-  effect,
   inject,
   viewChild,
   input,
   signal,
-  untracked,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
+import { signalMethod } from '@ngrx/signals';
 
 import { Todo } from '@models/todo.model';
 import { TodosStore } from '@services/todos.store';
@@ -32,22 +31,13 @@ export class TodoComponent {
   titleControl = new FormControl('', { nonNullable: true });
   readonly inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
-  constructor() {
-    // TODO (signalMethod — Caso 2): importar signalMethod desde '@ngrx/signals'
-    // TODO (signalMethod — Caso 2): crear syncTitle = signalMethod<Todo>((todo) => { ... })
-    // TODO (signalMethod — Caso 2): conectar con syncTitle(this.todo) en el constructor
-    // TODO (signalMethod — Caso 2): eliminar effect + untracked de abajo
-    effect(() => {
-      const title = this.todo().title;
+  private readonly syncTitle = signalMethod<Todo>((todo) => {
+    this.titleControl.setValue(todo.title);
+    this.syncCount.update((count) => count + 1);
+  });
 
-      // untracked: setValue y syncCount.update son writes imperativos.
-      // Sin untracked, syncCount quedaría trackeado → el effect se re-dispara
-      // al incrementar el contador → bucle infinito (implicit tracking).
-      untracked(() => {
-        this.titleControl.setValue(title);
-        this.syncCount.update((count) => count + 1);
-      });
-    });
+  constructor() {
+    this.syncTitle(this.todo);
   }
 
   toggle() {

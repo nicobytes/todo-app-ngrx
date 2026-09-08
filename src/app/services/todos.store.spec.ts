@@ -49,24 +49,4 @@ describe('TodosStore', () => {
     });
   });
 
-  /*
-   * Fase 1 — effect() en withHooks (referencia para el tutorial):
-   *
-   * effect(() => {
-   *   const todos = store.todos();
-   *   untracked(() => {
-   *     storage.save(todos);
-   *   });
-   * });
-   *
-   * Test frágil equivalente:
-   *
-   * it('should persist via effect when todos change (indirect)', fakeAsync(() => {
-   *   store.add('New todo');
-   *   TestBed.tick();
-   *   expect(storage.save).toHaveBeenCalled();
-   * }));
-   *
-   * Problemas: untracked() obligatorio, TestBed.tick(), sin invocación directa de persist().
-   */
 });

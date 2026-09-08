@@ -1,6 +1,6 @@
 /// <reference types="jasmine" />
 
-import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Todo } from '../../models/todo.model';
 import { TodoComponent } from './todo.component';
@@ -24,25 +24,12 @@ describe('TodoComponent', () => {
     component = fixture.componentInstance;
   });
 
-  describe('effect (Fase 1 — código actual)', () => {
-    it('should sync title when todo input changes', fakeAsync(() => {
-      fixture.componentRef.setInput('todo', { id: '1', title: 'Updated', completed: false });
-      TestBed.tick();
+  describe('signalMethod syncTitle (Fase 2)', () => {
+    it('should sync title when syncTitle is called directly', () => {
+      component['syncTitle']({ id: '1', title: 'Test title', completed: false });
 
-      expect(component.titleControl.value).toBe('Updated');
-      expect(component.syncCount()).toBeGreaterThan(0);
-    }));
+      expect(component.titleControl.value).toBe('Test title');
+      expect(component.syncCount()).toBe(1);
+    });
   });
-
-  /*
-   * TODO (signalMethod — Fase 2): reemplazar el describe de arriba por estos tests
-   * cuando migres effect → signalMethod en todo.component.ts
-   *
-   * it('should sync title when syncTitle is called directly', () => {
-   *   component['syncTitle']({ id: '1', title: 'Test title', completed: false });
-   *   expect(component.titleControl.value).toBe('Test title');
-   *   expect(component.syncCount()).toBe(1);
-   *   // Sin TestBed.tick() — invocación directa
-   * });
-   */
 });
